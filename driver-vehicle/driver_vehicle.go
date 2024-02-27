@@ -9,7 +9,6 @@ import (
 )
 
 type DriverVehicle struct {
-	ID        int
 	DriverID  int
 	VehicleID int
 	CreatedAt time.Time
