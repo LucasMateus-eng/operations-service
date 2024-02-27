@@ -39,7 +39,7 @@ func MapDTOToVehicle(vehicleDTO *vehicle_dto.VehicleDTO) (*vehicle.Vehicle, erro
 			Renavam: vehicleDTO.Renavam,
 			Licensing: vehicle.Licensing{
 				ExpiryDate: vehicleDTO.LicensingExpiryDate,
-				Status:     *licensingStatus,
+				Status:     licensingStatus,
 			},
 		},
 		CreatedAt: vehicleDTO.CreatedAt,

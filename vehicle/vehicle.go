@@ -2,6 +2,7 @@ package vehicle
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"slices"
@@ -22,16 +23,14 @@ const (
 
 var (
 	licensingStatusMap = map[string]LicensingStatus{
-		"UNDEFINED": UNDEFINED,
-		"REGULAR":   REGULAR,
-		"LATE":      LATE,
-		"BLOCKED":   BLOCKED,
-		"SEIZED":    SEIZED,
-		"STOLEN":    STOLEN,
+		"REGULAR": REGULAR,
+		"LATE":    LATE,
+		"BLOCKED": BLOCKED,
+		"SEIZED":  SEIZED,
+		"STOLEN":  STOLEN,
 	}
 
 	licensingStatusList = []LicensingStatus{
-		UNDEFINED,
 		REGULAR,
 		LATE,
 		BLOCKED,
@@ -40,14 +39,14 @@ var (
 	}
 )
 
-func GetLicensingStatus(name string) (*LicensingStatus, error) {
+func GetLicensingStatus(name string) (LicensingStatus, error) {
 	for key, value := range licensingStatusMap {
 		if strings.EqualFold(key, name) {
-			return &value, nil
+			return value, nil
 		}
 	}
 
-	return nil, fmt.Errorf("the given licensing status [%s] is non-existent in the map of valid values", name)
+	return UNDEFINED, fmt.Errorf("the given licensing status [%s] is non-existent in the map of valid values", name)
 }
 
 func (ls LicensingStatus) Change(new LicensingStatus) (*LicensingStatus, error) {
@@ -81,6 +80,22 @@ func (ls LicensingStatus) String() string {
 	}
 
 	return "UNDEFINED"
+}
+
+func (ls LicensingStatus) MarshalJSON() ([]byte, error) {
+	return json.Marshal(ls.String())
+}
+
+func (ls *LicensingStatus) UnmarshalJSON(data []byte) (err error) {
+	var licensingStatus string
+	if err := json.Unmarshal(data, &licensingStatus); err != nil {
+		return err
+	}
+	if *ls, err = GetLicensingStatus(licensingStatus); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 type Licensing struct {
