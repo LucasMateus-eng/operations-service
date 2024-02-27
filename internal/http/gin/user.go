@@ -23,7 +23,7 @@ type userInputputDTO struct {
 	Role           user.Role `json:"role" binding:"required"`
 }
 
-func mapUserToOutputDTO(user *user.User) *userOutputDTO {
+func mapUserToOutputDTO(user user.User) *userOutputDTO {
 	return &userOutputDTO{
 		ID:             user.ID,
 		Username:       user.Username,
@@ -35,7 +35,7 @@ func mapUserToOutputDTO(user *user.User) *userOutputDTO {
 	}
 }
 
-func mapInputDTOToUser(input *userInputputDTO) *user.User {
+func mapInputDTOToUser(input userInputputDTO) *user.User {
 	return &user.User{
 		ID:             input.ID,
 		Username:       input.Username,

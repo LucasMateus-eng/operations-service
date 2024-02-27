@@ -35,7 +35,7 @@ type addressInputDTO struct {
 	Country      string                 `json:"country" binding:"required"`
 }
 
-func mapAddressToOutputDTO(address *address.Address) *addressOutputDTO {
+func mapAddressToOutputDTO(address address.Address) *addressOutputDTO {
 	return &addressOutputDTO{
 		ID:           address.ID,
 		UserID:       address.UserID,
@@ -53,7 +53,7 @@ func mapAddressToOutputDTO(address *address.Address) *addressOutputDTO {
 	}
 }
 
-func mapInputDTOToAddress(input *addressInputDTO) *address.Address {
+func mapInputDTOToAddress(input addressInputDTO) *address.Address {
 	return &address.Address{
 		ID:           input.ID,
 		UserID:       input.UserID,

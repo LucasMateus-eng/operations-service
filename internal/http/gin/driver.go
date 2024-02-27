@@ -50,7 +50,7 @@ type driverInputDTO struct {
 	Email         string    `json:"email" binding:"required"`
 }
 
-func mapDriverToOutputDTO(driver *driver.Driver) *driverOutputDTO {
+func mapDriverToOutputDTO(driver driver.Driver) *driverOutputDTO {
 	return &driverOutputDTO{
 		ID:            driver.ID,
 		UserID:        driver.UserID,
@@ -61,7 +61,7 @@ func mapDriverToOutputDTO(driver *driver.Driver) *driverOutputDTO {
 		DriverLicense: driver.LegalInformation.DriverLicense,
 		CellPhone:     driver.Contact.CellPhone,
 		Email:         driver.Contact.Email,
-		Address:       mapAddressToOutputDTO(driver.Address),
+		Address:       mapAddressToOutputDTO(*driver.Address),
 		Vehicles:      mapVehicleListToOutputDTO(driver.Vehicles),
 		CreatedAt:     driver.CreatedAt,
 		UpdatedAt:     driver.UpdatedAt,
@@ -69,7 +69,7 @@ func mapDriverToOutputDTO(driver *driver.Driver) *driverOutputDTO {
 	}
 }
 
-func mapInputDTOToDriver(input *driverInputDTO) *driver.Driver {
+func mapInputDTOToDriver(input driverInputDTO) *driver.Driver {
 	return &driver.Driver{
 		ID:     input.ID,
 		UserID: input.UserID,
@@ -92,7 +92,7 @@ func mapInputDTOToDriver(input *driverInputDTO) *driver.Driver {
 func mapDriverOutputListToDTO(drivers []driver.Driver) []driverOutputDTO {
 	driverDTOs := make([]driverOutputDTO, 0, len(drivers))
 	for i, d := range drivers {
-		driverDTOs[i] = *mapDriverToOutputDTO(&d)
+		driverDTOs[i] = *mapDriverToOutputDTO(d)
 	}
 	return driverDTOs
 }
@@ -149,7 +149,7 @@ func listDrivers(ctx context.Context, service driver.Service, logger *slog.Logge
 
 		driversDTO := make([]driverOutputDTO, 0, len(*drivers))
 		for _, dv := range *drivers {
-			driversDTO = append(driversDTO, *mapDriverToOutputDTO(&dv))
+			driversDTO = append(driversDTO, *mapDriverToOutputDTO(dv))
 		}
 
 		c.JSON(http.StatusOK, driversDTO)
@@ -164,7 +164,7 @@ func createDriver(ctx context.Context, service driver.Service, logger *slog.Logg
 			return
 		}
 
-		driver := mapInputDTOToDriver(&dto)
+		driver := mapInputDTOToDriver(dto)
 
 		driverID, err := service.Create(ctx, driver)
 		if err != nil {
@@ -190,7 +190,7 @@ func updateDriver(ctx context.Context, service driver.Service, logger *slog.Logg
 			return
 		}
 
-		driver := mapInputDTOToDriver(&dto)
+		driver := mapInputDTOToDriver(dto)
 		driver.ID = driverID
 
 		err = service.Update(ctx, driver)

@@ -31,7 +31,7 @@ type vehicleInputDTO struct {
 	LicensingStatus   vehicle.LicensingStatus `json:"licensing_status" binding:"required"`
 }
 
-func mapVehicleToOutputDTO(vehicle *vehicle.Vehicle) *vehicleOutputDTO {
+func mapVehicleToOutputDTO(vehicle vehicle.Vehicle) *vehicleOutputDTO {
 	return &vehicleOutputDTO{
 		ID:                vehicle.ID,
 		Brand:             vehicle.Attributes.Brand,
@@ -47,7 +47,7 @@ func mapVehicleToOutputDTO(vehicle *vehicle.Vehicle) *vehicleOutputDTO {
 	}
 }
 
-func mapInputDTOToVehicle(input *vehicleOutputDTO) *vehicle.Vehicle {
+func mapInputDTOToVehicle(input vehicleOutputDTO) *vehicle.Vehicle {
 	return &vehicle.Vehicle{
 		ID: input.ID,
 		Attributes: vehicle.VehicleAttributes{
@@ -69,7 +69,7 @@ func mapInputDTOToVehicle(input *vehicleOutputDTO) *vehicle.Vehicle {
 func mapVehicleListToOutputDTO(vehicles []vehicle.Vehicle) []vehicleOutputDTO {
 	vehicleDTOs := make([]vehicleOutputDTO, 0, len(vehicles))
 	for i, v := range vehicles {
-		vehicleDTOs[i] = *mapVehicleToOutputDTO(&v)
+		vehicleDTOs[i] = *mapVehicleToOutputDTO(v)
 	}
 	return vehicleDTOs
 }

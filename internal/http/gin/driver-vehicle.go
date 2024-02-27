@@ -19,7 +19,7 @@ type driverVehicleInputDTO struct {
 	VehicleID int `json:"vehicle_id" binding:"required"`
 }
 
-func mapDriverVehicleToOutputDTO(driverVehicle *drivervehicle.DriverVehicle) *driverVehicleOutputDTO {
+func mapDriverVehicleToOutputDTO(driverVehicle drivervehicle.DriverVehicle) *driverVehicleOutputDTO {
 	return &driverVehicleOutputDTO{
 		DriverID:  driverVehicle.DriverID,
 		VehicleID: driverVehicle.VehicleID,
@@ -29,7 +29,7 @@ func mapDriverVehicleToOutputDTO(driverVehicle *drivervehicle.DriverVehicle) *dr
 	}
 }
 
-func mapInputDTOToDriverVehicle(input *driverVehicleInputDTO) *drivervehicle.DriverVehicle {
+func mapInputDTOToDriverVehicle(input driverVehicleInputDTO) *drivervehicle.DriverVehicle {
 	return &drivervehicle.DriverVehicle{
 		DriverID:  input.DriverID,
 		VehicleID: input.VehicleID,
