@@ -11,7 +11,7 @@ type UserDTO struct {
 	bun.BaseModel `bun:"table:users"`
 
 	ID             int                     `bun:"id,pk"`
-	Username       string                  `bun:"username,notnull"`
+	Username       string                  `bun:"username,unique,notnull"`
 	HashedPassword string                  `bun:"hashed_password,notnull"`
 	Role           string                  `bun:"role,notnull"`
 	CreatedAt      time.Time               `bun:"created_at,nullzero,notnull,default:current_timestamp"`
