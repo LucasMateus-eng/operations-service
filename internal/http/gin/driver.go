@@ -89,14 +89,6 @@ func mapInputDTOToDriver(input driverInputDTO) *driver.Driver {
 	}
 }
 
-func mapDriverOutputListToDTO(drivers []driver.Driver) []driverOutputDTO {
-	driverDTOs := make([]driverOutputDTO, 0, len(drivers))
-	for i, d := range drivers {
-		driverDTOs[i] = *mapDriverToOutputDTO(d)
-	}
-	return driverDTOs
-}
-
 type driverSpecificationInputDTO struct {
 	Page     int `form:"page" binding:"required"`
 	PageSize int `form:"pageSize" binding:"required"`

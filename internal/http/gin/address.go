@@ -22,19 +22,6 @@ type addressOutputDTO struct {
 	DeletedAt    time.Time              `json:"deleted_at,omitempty"`
 }
 
-type addressInputDTO struct {
-	ID           int                    `json:"id"`
-	UserID       int                    `json:"user_id" binding:"required"`
-	Locality     string                 `json:"locality" binding:"required"`
-	Number       string                 `json:"number" binding:"required"`
-	Complement   string                 `json:"complement,omitempty" binding:"required"`
-	Neighborhood string                 `json:"neighborhood" binding:"required"`
-	City         string                 `json:"city" binding:"required"`
-	State        address.BrazilianState `json:"state" binding:"required"`
-	CEP          string                 `json:"cep" binding:"required"`
-	Country      string                 `json:"country" binding:"required"`
-}
-
 func mapAddressToOutputDTO(address address.Address) *addressOutputDTO {
 	return &addressOutputDTO{
 		ID:           address.ID,
@@ -50,20 +37,5 @@ func mapAddressToOutputDTO(address address.Address) *addressOutputDTO {
 		CreatedAt:    address.CreatedAt,
 		UpdatedAt:    address.UpdatedAt,
 		DeletedAt:    address.DeletedAt,
-	}
-}
-
-func mapInputDTOToAddress(input addressInputDTO) *address.Address {
-	return &address.Address{
-		ID:           input.ID,
-		UserID:       input.UserID,
-		Locality:     input.Locality,
-		Number:       input.Number,
-		Complement:   input.Complement,
-		Neighborhood: input.Neighborhood,
-		City:         input.City,
-		State:        input.State,
-		CEP:          input.CEP,
-		Country:      input.Country,
 	}
 }
