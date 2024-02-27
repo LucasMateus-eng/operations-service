@@ -63,7 +63,7 @@ func MapDTOToDriver(driverDTO *driver_dto.DriverDTO) (*driver.Driver, error) {
 			Complement:   driverDTO.User.AddressDTO.Complement,
 			Neighborhood: driverDTO.User.AddressDTO.Neighborhood,
 			City:         driverDTO.User.AddressDTO.City,
-			State:        *state,
+			State:        state,
 			CEP:          driverDTO.User.AddressDTO.CEP,
 			Country:      driverDTO.User.AddressDTO.Country,
 			CreatedAt:    driverDTO.User.AddressDTO.CreatedAt,

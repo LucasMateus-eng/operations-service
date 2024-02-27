@@ -36,7 +36,7 @@ func MapDTOToAddress(addressDTO *address_dto.AddressDTO) (*address.Address, erro
 		Complement:   addressDTO.Complement,
 		Neighborhood: addressDTO.Neighborhood,
 		City:         addressDTO.City,
-		State:        *state,
+		State:        state,
 		CEP:          addressDTO.CEP,
 		Country:      addressDTO.Country,
 		UserID:       addressDTO.UserID,

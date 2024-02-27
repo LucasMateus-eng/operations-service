@@ -2,6 +2,7 @@ package address
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"slices"
@@ -44,7 +45,6 @@ const (
 
 var (
 	brazilianStateMap = map[string]BrazilianState{
-		"UNDEFINED":           UNDEFINED,
 		"ACRE":                AC,
 		"ALAGOAS":             AL,
 		"AMAPÁ":               AP,
@@ -105,14 +105,14 @@ var (
 	}
 )
 
-func GetBrazilianState(name string) (*BrazilianState, error) {
+func GetBrazilianState(name string) (BrazilianState, error) {
 	for key, value := range brazilianStateMap {
 		if strings.EqualFold(key, name) {
-			return &value, nil
+			return value, nil
 		}
 	}
 
-	return nil, fmt.Errorf("the given brazilian state [%s] is non-existent in the map of valid values", name)
+	return UNDEFINED, fmt.Errorf("the given brazilian state [%s] is non-existent in the map of valid values", name)
 }
 
 func (bs BrazilianState) Change(new BrazilianState) (*BrazilianState, error) {
@@ -190,6 +190,22 @@ func (bs BrazilianState) String() string {
 	}
 
 	return "UNDEFINED"
+}
+
+func (bs BrazilianState) MarshalJSON() ([]byte, error) {
+	return json.Marshal(bs.String())
+}
+
+func (bs *BrazilianState) UnmarshalJSON(data []byte) (err error) {
+	var brazilianState string
+	if err := json.Unmarshal(data, &brazilianState); err != nil {
+		return err
+	}
+	if *bs, err = GetBrazilianState(brazilianState); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 type Address struct {
