@@ -36,6 +36,22 @@ func (ur *userPostgresRepo) GetById(ctx context.Context, id int) (*user.User, er
 	return mappedValue, nil
 }
 
+func (ur *userPostgresRepo) GetByUsername(ctx context.Context, username string) (*user.User, error) {
+	var userDTO dto.UserDTO
+
+	err := ur.db.NewSelect().Model(&userDTO).Where("username = ?", username).Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	mappedValue, err := mapping.MapDTOToUser(&userDTO)
+	if err != nil {
+		return nil, err
+	}
+
+	return mappedValue, nil
+}
+
 func (ur *userPostgresRepo) GetByRole(ctx context.Context, role user.Role) (*user.User, error) {
 	var userDTO dto.UserDTO
 

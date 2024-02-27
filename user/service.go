@@ -26,6 +26,15 @@ func (s *Service) GetById(ctx context.Context, id int) (*User, error) {
 	return user, nil
 }
 
+func (s *Service) GetByUsername(ctx context.Context, username string) (*User, error) {
+	user, err := s.repo.GetByUsername(ctx, username)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
 func (s *Service) GetByRole(ctx context.Context, role Role) (*User, error) {
 	user, err := s.repo.GetByRole(ctx, role)
 	if err != nil {

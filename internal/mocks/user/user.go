@@ -70,6 +70,21 @@ func (mr *MockReadingMockRecorder) GetByRole(ctx, role any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByRole", reflect.TypeOf((*MockReading)(nil).GetByRole), ctx, role)
 }
 
+// GetByUsername mocks base method.
+func (m *MockReading) GetByUsername(ctx context.Context, username string) (*user.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetByUsername", ctx, username)
+	ret0, _ := ret[0].(*user.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByUsername indicates an expected call of GetByUsername.
+func (mr *MockReadingMockRecorder) GetByUsername(ctx, username any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUsername", reflect.TypeOf((*MockReading)(nil).GetByUsername), ctx, username)
+}
+
 // MockWriting is a mock of Writing interface.
 type MockWriting struct {
 	ctrl     *gomock.Controller
@@ -218,6 +233,21 @@ func (mr *MockRepositoryMockRecorder) GetByRole(ctx, role any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByRole", reflect.TypeOf((*MockRepository)(nil).GetByRole), ctx, role)
 }
 
+// GetByUsername mocks base method.
+func (m *MockRepository) GetByUsername(ctx context.Context, username string) (*user.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetByUsername", ctx, username)
+	ret0, _ := ret[0].(*user.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByUsername indicates an expected call of GetByUsername.
+func (mr *MockRepositoryMockRecorder) GetByUsername(ctx, username any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUsername", reflect.TypeOf((*MockRepository)(nil).GetByUsername), ctx, username)
+}
+
 // Update mocks base method.
 func (m *MockRepository) Update(ctx context.Context, u *user.User) error {
 	m.ctrl.T.Helper()
@@ -312,6 +342,21 @@ func (m *MockUseCase) GetByRole(ctx context.Context, role user.Role) (*user.User
 func (mr *MockUseCaseMockRecorder) GetByRole(ctx, role any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByRole", reflect.TypeOf((*MockUseCase)(nil).GetByRole), ctx, role)
+}
+
+// GetByUsername mocks base method.
+func (m *MockUseCase) GetByUsername(ctx context.Context, username string) (*user.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetByUsername", ctx, username)
+	ret0, _ := ret[0].(*user.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByUsername indicates an expected call of GetByUsername.
+func (mr *MockUseCaseMockRecorder) GetByUsername(ctx, username any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUsername", reflect.TypeOf((*MockUseCase)(nil).GetByUsername), ctx, username)
 }
 
 // Update mocks base method.
