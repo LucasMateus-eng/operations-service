@@ -35,6 +35,7 @@ func Handlers(ctx context.Context, logger *slog.Logger) *gin.Engine {
 	{
 		dGroup.GET("/", listDrivers(ctx, driverService, logger))
 		dGroup.POST("/", createDriver(ctx, driverService, logger))
+		dGroup.GET("/:id", getDriver(ctx, driverService, logger))
 		dGroup.PUT("/:id", updateDriver(ctx, driverService, logger))
 		dGroup.DELETE("/:id", deleteDriver(ctx, driverService, logger))
 	}

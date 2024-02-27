@@ -98,11 +98,11 @@ func mapDriverOutputListToDTO(drivers []driver.Driver) []driverOutputDTO {
 }
 
 type driverSpecificationInputDTO struct {
-	Page     int `form:"page"`
-	PageSize int `form:"pageSize"`
+	Page     int `form:"page" binding:"required"`
+	PageSize int `form:"pageSize" binding:"required"`
 }
 
-func mapInputDTOToDriverSpecification(input *driverSpecificationInputDTO) *driver.DriverSpecification {
+func mapInputDTOToDriverSpecification(input driverSpecificationInputDTO) *driver.DriverSpecification {
 	return &driver.DriverSpecification{
 		Page:     input.Page,
 		PageSize: input.PageSize,
@@ -128,9 +128,9 @@ func listDrivers(ctx context.Context, service *driver.Service, logger *slog.Logg
 			return
 		}
 
-		driverSpecification := mapInputDTOToDriverSpecification(&ds)
-		var drivers *[]driver.Driver
+		driverSpecification := mapInputDTOToDriverSpecification(ds)
 
+		var drivers *[]driver.Driver
 		if isEagerLoading {
 			drivers, err = service.ListWithEagerLoading(ctx, driverSpecification)
 		} else {
@@ -173,6 +173,26 @@ func createDriver(ctx context.Context, service *driver.Service, logger *slog.Log
 		}
 
 		c.JSON(http.StatusOK, driverOutputDTO{ID: driverID})
+	}
+}
+
+func getDriver(ctx context.Context, service *driver.Service, logger *slog.Logger) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		driverID, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		driver, err := service.GetByDriverId(ctx, driverID)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		outputDTO := mapDriverToOutputDTO(*driver)
+
+		c.JSON(http.StatusOK, outputDTO)
 	}
 }
 
