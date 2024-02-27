@@ -101,7 +101,7 @@ func (mr *MockReadingMockRecorder) GetByUserIdWithEagerLoading(ctx, userId any) 
 }
 
 // List mocks base method.
-func (m *MockReading) List(ctx context.Context, specification driver.DriverSpectification) (*[]driver.Driver, error) {
+func (m *MockReading) List(ctx context.Context, specification *driver.DriverSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.Driver)
@@ -116,7 +116,7 @@ func (mr *MockReadingMockRecorder) List(ctx, specification any) *gomock.Call {
 }
 
 // ListWithEagerLoading mocks base method.
-func (m *MockReading) ListWithEagerLoading(ctx context.Context, specification driver.DriverSpectification) (*[]driver.Driver, error) {
+func (m *MockReading) ListWithEagerLoading(ctx context.Context, specification *driver.DriverSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListWithEagerLoading", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.Driver)
@@ -309,7 +309,7 @@ func (mr *MockRepositoryMockRecorder) GetByUserIdWithEagerLoading(ctx, userId an
 }
 
 // List mocks base method.
-func (m *MockRepository) List(ctx context.Context, specification driver.DriverSpectification) (*[]driver.Driver, error) {
+func (m *MockRepository) List(ctx context.Context, specification *driver.DriverSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.Driver)
@@ -324,7 +324,7 @@ func (mr *MockRepositoryMockRecorder) List(ctx, specification any) *gomock.Call 
 }
 
 // ListWithEagerLoading mocks base method.
-func (m *MockRepository) ListWithEagerLoading(ctx context.Context, specification driver.DriverSpectification) (*[]driver.Driver, error) {
+func (m *MockRepository) ListWithEagerLoading(ctx context.Context, specification *driver.DriverSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListWithEagerLoading", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.Driver)
@@ -465,7 +465,7 @@ func (mr *MockUseCaseMockRecorder) GetByUserIdWithEagerLoading(ctx, userId any) 
 }
 
 // List mocks base method.
-func (m *MockUseCase) List(ctx context.Context, specification driver.DriverSpectification) (*[]driver.Driver, error) {
+func (m *MockUseCase) List(ctx context.Context, specification *driver.DriverSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.Driver)
@@ -480,7 +480,7 @@ func (mr *MockUseCaseMockRecorder) List(ctx, specification any) *gomock.Call {
 }
 
 // ListWithEagerLoading mocks base method.
-func (m *MockUseCase) ListWithEagerLoading(ctx context.Context, specification driver.DriverSpectification) (*[]driver.Driver, error) {
+func (m *MockUseCase) ListWithEagerLoading(ctx context.Context, specification *driver.DriverSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListWithEagerLoading", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.Driver)
