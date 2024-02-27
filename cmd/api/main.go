@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/LucasMateus-eng/operations-service/config"
+	driver_vehicle_postgres_dto "github.com/LucasMateus-eng/operations-service/driver-vehicle/postgres/dto"
 	"github.com/LucasMateus-eng/operations-service/internal/api"
 	"github.com/LucasMateus-eng/operations-service/internal/db/postgres"
 	"github.com/LucasMateus-eng/operations-service/internal/http/gin"
@@ -12,9 +13,11 @@ import (
 )
 
 func main() {
+	db := postgres.InitPostgreSQL()
+	db.RegisterModel((*driver_vehicle_postgres_dto.DriverVehicleDTO)(nil))
+
 	ctx := context.Background()
 	config := config.NewConfig()
-	db := postgres.InitPostgreSQL()
 	logger := logging.InitializerLogging(config)
 
 	h := gin.Handlers(ctx, db, logger)
