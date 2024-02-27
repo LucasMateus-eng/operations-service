@@ -5,6 +5,8 @@ import (
 	"log/slog"
 
 	"github.com/LucasMateus-eng/operations-service/driver"
+	drivervehicle "github.com/LucasMateus-eng/operations-service/driver-vehicle"
+	postgres_driver_vehicle "github.com/LucasMateus-eng/operations-service/driver-vehicle/postgres"
 	postgres_driver "github.com/LucasMateus-eng/operations-service/driver/postgres"
 	"github.com/LucasMateus-eng/operations-service/internal/db/postgres"
 	"github.com/LucasMateus-eng/operations-service/user"
@@ -23,6 +25,8 @@ func Handlers(ctx context.Context, logger *slog.Logger) *gin.Engine {
 	driverService := driver.NewService(driverRepo, logger)
 	vehicleRepo := postgres_vehicle.New(db)
 	vehicleService := vehicle.NewService(vehicleRepo, logger)
+	driverVehicleRepo := postgres_driver_vehicle.New(db)
+	driverVehicleService := drivervehicle.NewService(driverVehicleRepo, logger)
 
 	r := gin.Default()
 
@@ -51,6 +55,14 @@ func Handlers(ctx context.Context, logger *slog.Logger) *gin.Engine {
 		vGroup.GET("/:id", getVehicle(ctx, vehicleService, logger))
 		vGroup.PUT("/:id", updateVehicle(ctx, vehicleService, logger))
 		vGroup.DELETE("/:id", deleteVehicle(ctx, vehicleService, logger))
+	}
+
+	dvGroup := v1.Group("drivers-vehicles")
+	{
+		dvGroup.POST("/", createDriverVehicle(ctx, driverVehicleService, logger))
+		dvGroup.GET("/:driver_id", listVehiclesByDriverID(ctx, driverVehicleService, logger))
+		dvGroup.GET("/:vehicle_id", listDriversByVehicleID(ctx, driverVehicleService, logger))
+		dvGroup.DELETE("/:driver_id/:vehicle_id", deleteDriverVehicle(ctx, driverVehicleService, logger))
 	}
 
 	r.GET("/health", healthHandler)
