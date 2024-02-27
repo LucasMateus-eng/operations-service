@@ -39,7 +39,7 @@ type Driver struct {
 
 type DriverList []Driver
 
-type DriverSpectification struct {
+type DriverSpecification struct {
 	Page, PageSize int
 }
 
@@ -48,8 +48,8 @@ type Reading interface {
 	GetByUserId(ctx context.Context, userId int) (*Driver, error)
 	GetByIdWithEagerLoading(ctx context.Context, id int) (*Driver, error)
 	GetByUserIdWithEagerLoading(ctx context.Context, userId int) (*Driver, error)
-	List(ctx context.Context, specification DriverSpectification) (*[]Driver, error)
-	ListWithEagerLoading(ctx context.Context, specification DriverSpectification) (*[]Driver, error)
+	List(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
+	ListWithEagerLoading(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 }
 
 type Writing interface {
@@ -68,8 +68,8 @@ type UseCase interface {
 	GetByUserId(ctx context.Context, userId int) (*Driver, error)
 	GetByIdWithEagerLoading(ctx context.Context, id int) (*Driver, error)
 	GetByUserIdWithEagerLoading(ctx context.Context, userId int) (*Driver, error)
-	List(ctx context.Context, specification DriverSpectification) (*[]Driver, error)
-	ListWithEagerLoading(ctx context.Context, specification DriverSpectification) (*[]Driver, error)
+	List(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
+	ListWithEagerLoading(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 	Create(ctx context.Context, d *Driver) (int, error)
 	Update(ctx context.Context, d *Driver) error
 	Delete(ctx context.Context, id int) error

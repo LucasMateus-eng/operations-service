@@ -53,7 +53,7 @@ func (s *Service) GetByUserIdWithEagerLoading(ctx context.Context, userId int) (
 	return driver, nil
 }
 
-func (s *Service) List(ctx context.Context, specification DriverSpectification) (*[]Driver, error) {
+func (s *Service) List(ctx context.Context, specification *DriverSpecification) (*[]Driver, error) {
 	drivers, err := s.repo.List(ctx, specification)
 	if err != nil {
 		return nil, err
@@ -62,7 +62,7 @@ func (s *Service) List(ctx context.Context, specification DriverSpectification) 
 	return drivers, nil
 }
 
-func (s *Service) ListWithEagerLoading(ctx context.Context, specification DriverSpectification) (*[]Driver, error) {
+func (s *Service) ListWithEagerLoading(ctx context.Context, specification *DriverSpecification) (*[]Driver, error) {
 	drivers, err := s.repo.ListWithEagerLoading(ctx, specification)
 	if err != nil {
 		return nil, err

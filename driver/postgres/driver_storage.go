@@ -104,7 +104,7 @@ func (dr *driverPostgresRepo) GetByUserIdWithEagerLoading(ctx context.Context, u
 	return mappedValue, nil
 }
 
-func (dr *driverPostgresRepo) List(ctx context.Context, specification driver.DriverSpectification) (*[]driver.Driver, error) {
+func (dr *driverPostgresRepo) List(ctx context.Context, specification *driver.DriverSpecification) (*[]driver.Driver, error) {
 	var driverDTOs []dto.DriverDTO
 
 	query := dr.db.NewSelect().Model(&driverDTOs).Order("id ASC")
@@ -132,7 +132,7 @@ func (dr *driverPostgresRepo) List(ctx context.Context, specification driver.Dri
 	return &drivers, nil
 }
 
-func (dr *driverPostgresRepo) ListWithEagerLoading(ctx context.Context, specification driver.DriverSpectification) (*[]driver.Driver, error) {
+func (dr *driverPostgresRepo) ListWithEagerLoading(ctx context.Context, specification *driver.DriverSpecification) (*[]driver.Driver, error) {
 	var driverDTOs []dto.DriverDTO
 
 	query := dr.db.NewSelect().
