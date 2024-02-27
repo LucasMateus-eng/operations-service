@@ -109,7 +109,7 @@ func mapInputDTOToDriverSpecification(input *driverSpecificationInputDTO) *drive
 	}
 }
 
-func listDrivers(ctx context.Context, service driver.Service, logger *slog.Logger) gin.HandlerFunc {
+func listDrivers(ctx context.Context, service *driver.Service, logger *slog.Logger) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var ds driverSpecificationInputDTO
 		if err := c.ShouldBindQuery(&ds); err != nil {
@@ -156,7 +156,7 @@ func listDrivers(ctx context.Context, service driver.Service, logger *slog.Logge
 	}
 }
 
-func createDriver(ctx context.Context, service driver.Service, logger *slog.Logger) gin.HandlerFunc {
+func createDriver(ctx context.Context, service *driver.Service, logger *slog.Logger) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var dto driverInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
@@ -176,7 +176,7 @@ func createDriver(ctx context.Context, service driver.Service, logger *slog.Logg
 	}
 }
 
-func updateDriver(ctx context.Context, service driver.Service, logger *slog.Logger) gin.HandlerFunc {
+func updateDriver(ctx context.Context, service *driver.Service, logger *slog.Logger) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		driverID, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
@@ -203,7 +203,7 @@ func updateDriver(ctx context.Context, service driver.Service, logger *slog.Logg
 	}
 }
 
-func deleteDriver(ctx context.Context, service driver.Service, logger *slog.Logger) gin.HandlerFunc {
+func deleteDriver(ctx context.Context, service *driver.Service, logger *slog.Logger) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		driverID, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
