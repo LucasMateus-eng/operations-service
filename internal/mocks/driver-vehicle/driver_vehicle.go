@@ -58,7 +58,7 @@ func (mr *MockReadingMockRecorder) GetByID(ctx, driverID, vehicleID any) *gomock
 }
 
 // GetDriverListByVehicleID mocks base method.
-func (m *MockReading) GetDriverListByVehicleID(ctx context.Context, specification drivervehicle.DriverVehicleSpectification) (*[]driver.Driver, error) {
+func (m *MockReading) GetDriverListByVehicleID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetDriverListByVehicleID", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.Driver)
@@ -73,7 +73,7 @@ func (mr *MockReadingMockRecorder) GetDriverListByVehicleID(ctx, specification a
 }
 
 // GetVehicleListByDriverID mocks base method.
-func (m *MockReading) GetVehicleListByDriverID(ctx context.Context, specification drivervehicle.DriverVehicleSpectification) (*[]vehicle.Vehicle, error) {
+func (m *MockReading) GetVehicleListByDriverID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]vehicle.Vehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetVehicleListByDriverID", ctx, specification)
 	ret0, _ := ret[0].(*[]vehicle.Vehicle)
@@ -207,7 +207,7 @@ func (mr *MockRepositoryMockRecorder) GetByID(ctx, driverID, vehicleID any) *gom
 }
 
 // GetDriverListByVehicleID mocks base method.
-func (m *MockRepository) GetDriverListByVehicleID(ctx context.Context, specification drivervehicle.DriverVehicleSpectification) (*[]driver.Driver, error) {
+func (m *MockRepository) GetDriverListByVehicleID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetDriverListByVehicleID", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.Driver)
@@ -222,7 +222,7 @@ func (mr *MockRepositoryMockRecorder) GetDriverListByVehicleID(ctx, specificatio
 }
 
 // GetVehicleListByDriverID mocks base method.
-func (m *MockRepository) GetVehicleListByDriverID(ctx context.Context, specification drivervehicle.DriverVehicleSpectification) (*[]vehicle.Vehicle, error) {
+func (m *MockRepository) GetVehicleListByDriverID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]vehicle.Vehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetVehicleListByDriverID", ctx, specification)
 	ret0, _ := ret[0].(*[]vehicle.Vehicle)
@@ -304,31 +304,31 @@ func (mr *MockUseCaseMockRecorder) GetByID(ctx, driverID, vehicleID any) *gomock
 }
 
 // GetDriverListByVehicleID mocks base method.
-func (m *MockUseCase) GetDriverListByVehicleID(ctx context.Context, vehicleID int) (*[]driver.DriverList, error) {
+func (m *MockUseCase) GetDriverListByVehicleID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]driver.DriverList, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetDriverListByVehicleID", ctx, vehicleID)
+	ret := m.ctrl.Call(m, "GetDriverListByVehicleID", ctx, specification)
 	ret0, _ := ret[0].(*[]driver.DriverList)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetDriverListByVehicleID indicates an expected call of GetDriverListByVehicleID.
-func (mr *MockUseCaseMockRecorder) GetDriverListByVehicleID(ctx, vehicleID any) *gomock.Call {
+func (mr *MockUseCaseMockRecorder) GetDriverListByVehicleID(ctx, specification any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDriverListByVehicleID", reflect.TypeOf((*MockUseCase)(nil).GetDriverListByVehicleID), ctx, vehicleID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDriverListByVehicleID", reflect.TypeOf((*MockUseCase)(nil).GetDriverListByVehicleID), ctx, specification)
 }
 
 // GetVehicleListByDriverID mocks base method.
-func (m *MockUseCase) GetVehicleListByDriverID(ctx context.Context, driverID int) (*[]vehicle.VehicleList, error) {
+func (m *MockUseCase) GetVehicleListByDriverID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]vehicle.VehicleList, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetVehicleListByDriverID", ctx, driverID)
+	ret := m.ctrl.Call(m, "GetVehicleListByDriverID", ctx, specification)
 	ret0, _ := ret[0].(*[]vehicle.VehicleList)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetVehicleListByDriverID indicates an expected call of GetVehicleListByDriverID.
-func (mr *MockUseCaseMockRecorder) GetVehicleListByDriverID(ctx, driverID any) *gomock.Call {
+func (mr *MockUseCaseMockRecorder) GetVehicleListByDriverID(ctx, specification any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVehicleListByDriverID", reflect.TypeOf((*MockUseCase)(nil).GetVehicleListByDriverID), ctx, driverID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVehicleListByDriverID", reflect.TypeOf((*MockUseCase)(nil).GetVehicleListByDriverID), ctx, specification)
 }

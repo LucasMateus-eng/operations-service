@@ -29,7 +29,7 @@ func (s *Service) GetByID(ctx context.Context, driverID, vehicleID int) (*Driver
 	return driverVehicle, nil
 }
 
-func (s *Service) GetDriverListByVehicleID(ctx context.Context, specification *DriverVehicleSpectification) (*[]driver.Driver, error) {
+func (s *Service) GetDriverListByVehicleID(ctx context.Context, specification *DriverVehicleSpecification) (*[]driver.Driver, error) {
 	drivers, err := s.repo.GetDriverListByVehicleID(ctx, specification)
 	if err != nil {
 		return nil, err
@@ -38,7 +38,7 @@ func (s *Service) GetDriverListByVehicleID(ctx context.Context, specification *D
 	return drivers, nil
 }
 
-func (s *Service) GetVehicleListByDriverID(ctx context.Context, specification *DriverVehicleSpectification) (*[]vehicle.Vehicle, error) {
+func (s *Service) GetVehicleListByDriverID(ctx context.Context, specification *DriverVehicleSpecification) (*[]vehicle.Vehicle, error) {
 	vehicles, err := s.repo.GetVehicleListByDriverID(ctx, specification)
 	if err != nil {
 		return nil, err

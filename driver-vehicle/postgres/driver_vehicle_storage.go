@@ -45,7 +45,7 @@ func (dr *driverVehiclePostgresRepo) GetByID(ctx context.Context, driverID, vehi
 	return mappedValue, nil
 }
 
-func (dr *driverVehiclePostgresRepo) GetDriverListByVehicleID(ctx context.Context, specification *driver_vehicle.DriverVehicleSpectification) (*[]driver.Driver, error) {
+func (dr *driverVehiclePostgresRepo) GetDriverListByVehicleID(ctx context.Context, specification *driver_vehicle.DriverVehicleSpecification) (*[]driver.Driver, error) {
 	var driverVehicleDTOs []dto.DriverVehicleDTO
 
 	query := dr.db.NewSelect().
@@ -77,7 +77,7 @@ func (dr *driverVehiclePostgresRepo) GetDriverListByVehicleID(ctx context.Contex
 	return &drivers, nil
 }
 
-func (dv *driverVehiclePostgresRepo) GetVehicleListByDriverID(ctx context.Context, specification *driver_vehicle.DriverVehicleSpectification) (*[]vehicle.Vehicle, error) {
+func (dv *driverVehiclePostgresRepo) GetVehicleListByDriverID(ctx context.Context, specification *driver_vehicle.DriverVehicleSpecification) (*[]vehicle.Vehicle, error) {
 	var driverVehicleDTOs []dto.DriverVehicleDTO
 
 	query := dv.db.NewSelect().
