@@ -3,11 +3,11 @@ package gin
 import (
 	"context"
 	"errors"
-	"log/slog"
 	"net/http"
 	"strconv"
 	"time"
 
+	"github.com/LucasMateus-eng/operations-service/internal/logging"
 	"github.com/LucasMateus-eng/operations-service/vehicle"
 	"github.com/gin-gonic/gin"
 )
@@ -110,7 +110,7 @@ func mapVehicleListToOutputDTO(vehicles []vehicle.Vehicle) []vehicleOutputDTO {
 	return vehicleDTOs
 }
 
-func listVehicles(ctx context.Context, service *vehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func listVehicles(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var vs vehicleSpecificationInputDTO
 		if err := c.ShouldBindQuery(&vs); err != nil {
@@ -140,7 +140,7 @@ func listVehicles(ctx context.Context, service *vehicle.Service, logger *slog.Lo
 	}
 }
 
-func getVehicle(ctx context.Context, service *vehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func getVehicle(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		vehicleID, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
@@ -160,7 +160,7 @@ func getVehicle(ctx context.Context, service *vehicle.Service, logger *slog.Logg
 	}
 }
 
-func createVehicle(ctx context.Context, service *vehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func createVehicle(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var dto vehicleInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
@@ -180,7 +180,7 @@ func createVehicle(ctx context.Context, service *vehicle.Service, logger *slog.L
 	}
 }
 
-func updateVehicle(ctx context.Context, service *vehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func updateVehicle(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		vehicleID, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
@@ -207,7 +207,7 @@ func updateVehicle(ctx context.Context, service *vehicle.Service, logger *slog.L
 	}
 }
 
-func deleteVehicle(ctx context.Context, service *vehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func deleteVehicle(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		vehicleID, err := strconv.Atoi(c.Param("id"))
 		if err != nil {

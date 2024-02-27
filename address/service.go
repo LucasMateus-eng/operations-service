@@ -2,15 +2,16 @@ package address
 
 import (
 	"context"
-	"log/slog"
+
+	"github.com/LucasMateus-eng/operations-service/internal/logging"
 )
 
 type Service struct {
 	repo   Repository
-	logger *slog.Logger
+	logger *logging.Logging
 }
 
-func NewService(r Repository, l *slog.Logger) *Service {
+func NewService(r Repository, l *logging.Logging) *Service {
 	return &Service{
 		repo:   r,
 		logger: l,

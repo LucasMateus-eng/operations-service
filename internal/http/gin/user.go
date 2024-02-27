@@ -2,11 +2,11 @@ package gin
 
 import (
 	"context"
-	"log/slog"
 	"net/http"
 	"strconv"
 	"time"
 
+	"github.com/LucasMateus-eng/operations-service/internal/logging"
 	"github.com/LucasMateus-eng/operations-service/user"
 	"github.com/gin-gonic/gin"
 )
@@ -49,7 +49,7 @@ func mapInputDTOToUser(input userInputDTO) *user.User {
 	}
 }
 
-func getUser(ctx context.Context, service *user.Service, logger *slog.Logger) gin.HandlerFunc {
+func getUser(ctx context.Context, service *user.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userID, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
@@ -69,7 +69,7 @@ func getUser(ctx context.Context, service *user.Service, logger *slog.Logger) gi
 	}
 }
 
-func createUser(ctx context.Context, service *user.Service, logger *slog.Logger) gin.HandlerFunc {
+func createUser(ctx context.Context, service *user.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var dto userInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
@@ -89,7 +89,7 @@ func createUser(ctx context.Context, service *user.Service, logger *slog.Logger)
 	}
 }
 
-func updateUser(ctx context.Context, service *user.Service, logger *slog.Logger) gin.HandlerFunc {
+func updateUser(ctx context.Context, service *user.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userID, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
@@ -116,7 +116,7 @@ func updateUser(ctx context.Context, service *user.Service, logger *slog.Logger)
 	}
 }
 
-func deleteUser(ctx context.Context, service *user.Service, logger *slog.Logger) gin.HandlerFunc {
+func deleteUser(ctx context.Context, service *user.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userID, err := strconv.Atoi(c.Param("id"))
 		if err != nil {

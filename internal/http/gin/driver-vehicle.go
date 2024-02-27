@@ -2,12 +2,12 @@ package gin
 
 import (
 	"context"
-	"log/slog"
 	"net/http"
 	"strconv"
 	"time"
 
 	drivervehicle "github.com/LucasMateus-eng/operations-service/driver-vehicle"
+	"github.com/LucasMateus-eng/operations-service/internal/logging"
 	"github.com/gin-gonic/gin"
 )
 
@@ -46,7 +46,7 @@ func mapInputDTOToDriverVehicle(input driverVehicleInputDTO) *drivervehicle.Driv
 	}
 }
 
-func listDriversByVehicleID(ctx context.Context, service *drivervehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func listDriversByVehicleID(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		vehicleID, err := strconv.Atoi(c.Param("vehicle_id"))
 		if err != nil {
@@ -86,7 +86,7 @@ func listDriversByVehicleID(ctx context.Context, service *drivervehicle.Service,
 	}
 }
 
-func listVehiclesByDriverID(ctx context.Context, service *drivervehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func listVehiclesByDriverID(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		driverID, err := strconv.Atoi(c.Param("driver_id"))
 		if err != nil {
@@ -126,7 +126,7 @@ func listVehiclesByDriverID(ctx context.Context, service *drivervehicle.Service,
 	}
 }
 
-func createDriverVehicle(ctx context.Context, service *drivervehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func createDriverVehicle(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var dto driverVehicleInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
@@ -148,7 +148,7 @@ func createDriverVehicle(ctx context.Context, service *drivervehicle.Service, lo
 	}
 }
 
-func deleteDriverVehicle(ctx context.Context, service *drivervehicle.Service, logger *slog.Logger) gin.HandlerFunc {
+func deleteDriverVehicle(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		driverID, err := strconv.Atoi(c.Param("driver_id"))
 		if err != nil {

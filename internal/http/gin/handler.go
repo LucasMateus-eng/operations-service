@@ -2,13 +2,13 @@ package gin
 
 import (
 	"context"
-	"log/slog"
 
 	"github.com/LucasMateus-eng/operations-service/driver"
 	drivervehicle "github.com/LucasMateus-eng/operations-service/driver-vehicle"
 	postgres_driver_vehicle "github.com/LucasMateus-eng/operations-service/driver-vehicle/postgres"
 	postgres_driver "github.com/LucasMateus-eng/operations-service/driver/postgres"
 	"github.com/LucasMateus-eng/operations-service/internal/db/postgres"
+	"github.com/LucasMateus-eng/operations-service/internal/logging"
 	"github.com/LucasMateus-eng/operations-service/user"
 	postgres_user "github.com/LucasMateus-eng/operations-service/user/postgres"
 	"github.com/LucasMateus-eng/operations-service/vehicle"
@@ -16,7 +16,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Handlers(ctx context.Context, logger *slog.Logger) *gin.Engine {
+func Handlers(ctx context.Context, logger *logging.Logging) *gin.Engine {
 	db := postgres.InitPostgreSQL()
 
 	userRepo := postgres_user.New(db)

@@ -2,18 +2,18 @@ package drivervehicle
 
 import (
 	"context"
-	"log/slog"
 
 	"github.com/LucasMateus-eng/operations-service/driver"
+	"github.com/LucasMateus-eng/operations-service/internal/logging"
 	"github.com/LucasMateus-eng/operations-service/vehicle"
 )
 
 type Service struct {
 	repo   Repository
-	logger *slog.Logger
+	logger *logging.Logging
 }
 
-func NewService(r Repository, l *slog.Logger) *Service {
+func NewService(r Repository, l *logging.Logging) *Service {
 	return &Service{
 		repo:   r,
 		logger: l,
