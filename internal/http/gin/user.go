@@ -1,9 +1,14 @@
 package gin
 
 import (
+	"context"
+	"log/slog"
+	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/LucasMateus-eng/operations-service/user"
+	"github.com/gin-gonic/gin"
 )
 
 type userOutputDTO struct {
@@ -16,7 +21,7 @@ type userOutputDTO struct {
 	DeletedAt      time.Time `json:"deleted_at,omitempty"`
 }
 
-type userInputputDTO struct {
+type userInputDTO struct {
 	ID             int       `json:"id"`
 	Username       string    `json:"username" binding:"required"`
 	HashedPassword string    `json:"hashed_password" binding:"required"`
@@ -35,11 +40,96 @@ func mapUserToOutputDTO(user user.User) *userOutputDTO {
 	}
 }
 
-func mapInputDTOToUser(input userInputputDTO) *user.User {
+func mapInputDTOToUser(input userInputDTO) *user.User {
 	return &user.User{
 		ID:             input.ID,
 		Username:       input.Username,
 		HashedPassword: input.HashedPassword,
 		Role:           input.Role,
+	}
+}
+
+func getUser(ctx context.Context, service *user.Service, logger *slog.Logger) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		userID, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		user, err := service.GetById(ctx, userID)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		outputDTO := mapUserToOutputDTO(*user)
+
+		c.JSON(http.StatusOK, outputDTO)
+	}
+}
+
+func createUser(ctx context.Context, service *user.Service, logger *slog.Logger) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var dto userInputDTO
+		if err := c.ShouldBindJSON(&dto); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		user := mapInputDTOToUser(dto)
+
+		userID, err := service.Create(ctx, user)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, userOutputDTO{ID: userID})
+	}
+}
+
+func updateUser(ctx context.Context, service *user.Service, logger *slog.Logger) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		userID, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		var dto userInputDTO
+		if err = c.ShouldBindJSON(&dto); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		user := mapInputDTOToUser(dto)
+		user.ID = userID
+
+		err = service.Update(ctx, user)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.Status(http.StatusNoContent)
+	}
+}
+
+func deleteUser(ctx context.Context, service *user.Service, logger *slog.Logger) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		userID, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		err = service.Delete(ctx, userID)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.Status(http.StatusNoContent)
 	}
 }
