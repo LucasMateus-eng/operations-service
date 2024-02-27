@@ -7,18 +7,16 @@ import (
 	drivervehicle "github.com/LucasMateus-eng/operations-service/driver-vehicle"
 	postgres_driver_vehicle "github.com/LucasMateus-eng/operations-service/driver-vehicle/postgres"
 	postgres_driver "github.com/LucasMateus-eng/operations-service/driver/postgres"
-	"github.com/LucasMateus-eng/operations-service/internal/db/postgres"
 	"github.com/LucasMateus-eng/operations-service/internal/logging"
 	"github.com/LucasMateus-eng/operations-service/user"
 	postgres_user "github.com/LucasMateus-eng/operations-service/user/postgres"
 	"github.com/LucasMateus-eng/operations-service/vehicle"
 	postgres_vehicle "github.com/LucasMateus-eng/operations-service/vehicle/postgres"
 	"github.com/gin-gonic/gin"
+	"github.com/uptrace/bun"
 )
 
-func Handlers(ctx context.Context, logger *logging.Logging) *gin.Engine {
-	db := postgres.InitPostgreSQL()
-
+func Handlers(ctx context.Context, db *bun.DB, logger *logging.Logging) *gin.Engine {
 	userRepo := postgres_user.New(db)
 	userService := user.NewService(userRepo, logger)
 	driverRepo := postgres_driver.New(db)
