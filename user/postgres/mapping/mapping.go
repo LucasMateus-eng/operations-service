@@ -29,7 +29,7 @@ func MapDTOToUser(userDTO *user_dto.UserDTO) (*user.User, error) {
 		ID:             userDTO.ID,
 		Username:       userDTO.Username,
 		HashedPassword: userDTO.HashedPassword,
-		Role:           *role,
+		Role:           role,
 		CreatedAt:      userDTO.CreatedAt,
 		UpdatedAt:      userDTO.UpdatedAt,
 		DeletedAt:      userDTO.DeletedAt,

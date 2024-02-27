@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"slices"
@@ -32,14 +33,14 @@ var (
 	}
 )
 
-func GetRole(name string) (*Role, error) {
+func GetRole(name string) (Role, error) {
 	for key, value := range roleMap {
 		if strings.EqualFold(key, name) {
-			return &value, nil
+			return value, nil
 		}
 	}
 
-	return nil, fmt.Errorf("the given role [%s] is non-existent in the map of valid values", name)
+	return UNDEFINED, fmt.Errorf("the given role [%s] is non-existent in the map of valid values", name)
 }
 
 func (r Role) Change(new Role) (*Role, error) {
@@ -69,6 +70,22 @@ func (r Role) String() string {
 	}
 
 	return "UNDEFINED"
+}
+
+func (r Role) MarshalJSON() ([]byte, error) {
+	return json.Marshal(r.String())
+}
+
+func (r *Role) UnmarshalJSON(data []byte) (err error) {
+	var role string
+	if err := json.Unmarshal(data, &role); err != nil {
+		return err
+	}
+	if *r, err = GetRole(role); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (r Role) IsAdministrator() bool {
