@@ -142,12 +142,12 @@ CREATE INDEX "created_at_index" ON "adresses" ("created_at");
 
 CREATE INDEX "updated_at_index" ON "adresses" ("updated_at");
 
-ALTER TABLE "drivers" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "drivers" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "drivers_vehicles" ADD FOREIGN KEY ("driver_id") REFERENCES "drivers" ("id");
+ALTER TABLE "drivers_vehicles" ADD FOREIGN KEY ("driver_id") REFERENCES "drivers" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "drivers_vehicles" ADD FOREIGN KEY ("vehicle_id") REFERENCES "vehicles" ("id");
+ALTER TABLE "drivers_vehicles" ADD FOREIGN KEY ("vehicle_id") REFERENCES "vehicles" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "adresses" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "adresses" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
 COMMIT;
