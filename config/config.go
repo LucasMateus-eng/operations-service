@@ -11,14 +11,15 @@ const (
 )
 
 type Config struct {
-	AppName             string `mapstructure:"APP_NAME"`
-	AppEnv              string `mapstructure:"APP_ENV"`
-	ApplicationLogLevel string `mapstructure:"APPLICATION_LOG_LEVEL"`
-	DBHost              string `mapstructure:"DB_HOST"`
-	DBPort              string `mapstructure:"DB_PORT"`
-	DBUser              string `mapstructure:"DB_USER"`
-	DBPass              string `mapstructure:"DB_PASS"`
-	DBName              string `mapstructure:"DB_NAME"`
+	AppName        string `mapstructure:"APP_NAME"`
+	AppEnv         string `mapstructure:"APP_ENV"`
+	AppLogLevel    string `mapstructure:"APP_LOG_LEVEL"`
+	AppDefaultPort string `mapstructure:"APP_DEFAULT_PORT"`
+	DBHost         string `mapstructure:"DB_HOST"`
+	DBPort         string `mapstructure:"DB_PORT"`
+	DBUser         string `mapstructure:"DB_USER"`
+	DBPass         string `mapstructure:"DB_PASS"`
+	DBName         string `mapstructure:"DB_NAME"`
 }
 
 func NewConfig() *Config {

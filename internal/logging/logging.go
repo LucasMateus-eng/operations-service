@@ -16,7 +16,7 @@ type Logging struct {
 func InitializerLogging(
 	config *config.Config,
 ) *Logging {
-	opts := &slog.HandlerOptions{Level: parseLevel(config.ApplicationLogLevel)}
+	opts := &slog.HandlerOptions{Level: parseLevel(config.AppLogLevel)}
 	jsonHandler := slog.NewJSONHandler(os.Stdout, opts)
 	logger := slog.New(jsonHandler).With(
 		"application_metadata",
