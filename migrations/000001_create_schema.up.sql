@@ -66,7 +66,7 @@ CREATE TABLE "drivers_vehicles" (
 
 CREATE TABLE "users" (
   "id" int PRIMARY KEY,
-  "username" text NOT NULL,
+  "username" text UNIQUE NOT NULL,
   "hashed_password" text NOT NULL,
   "role" user_role NOT NULL,
   "created_at" timestampz NOT NULL DEFAULT (now()),
