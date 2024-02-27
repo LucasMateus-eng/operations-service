@@ -11,11 +11,11 @@ import (
 )
 
 func buildPostgreSQLConnDSN() string {
-	host := os.Getenv("PG_HOST")
-	username := os.Getenv("PG_USER")
-	password := os.Getenv("PG_PASSWORD")
-	dbName := os.Getenv("PG_DATABASE")
-	port := os.Getenv("PG_PORT")
+	host := os.Getenv("DB_HOST")
+	username := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASS")
+	dbName := os.Getenv("DB_NAME")
+	port := os.Getenv("DB_PORT")
 
 	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=America/Sao_Paulo", host, username, password, dbName, port)
 }
