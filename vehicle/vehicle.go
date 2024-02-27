@@ -136,7 +136,7 @@ type Reading interface {
 	GetById(ctx context.Context, id int) (*Vehicle, error)
 	GetByPlate(ctx context.Context, plate string) (*Vehicle, error)
 	GetByRenavam(ctx context.Context, renavam string) (*Vehicle, error)
-	List(ctx context.Context, specification VehicleSpectification) (*[]Vehicle, error)
+	List(ctx context.Context, specification *VehicleSpectification) (*[]Vehicle, error)
 }
 
 type Writing interface {
@@ -154,7 +154,7 @@ type UseCase interface {
 	GetByVehicleId(ctx context.Context, id int) (*Vehicle, error)
 	GetByPlate(ctx context.Context, plate string) (*Vehicle, error)
 	GetByRenavam(ctx context.Context, renavam string) (*Vehicle, error)
-	List(ctx context.Context, specification VehicleSpectification) (*[]Vehicle, error)
+	List(ctx context.Context, specification *VehicleSpectification) (*[]Vehicle, error)
 	Create(ctx context.Context, v *Vehicle) (int, error)
 	Update(ctx context.Context, v *Vehicle) error
 	Delete(ctx context.Context, id int) error

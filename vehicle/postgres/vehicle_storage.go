@@ -68,7 +68,7 @@ func (vr *vehiclePostgresRepo) GetByRenavam(ctx context.Context, renavam string)
 	return mappedValue, nil
 }
 
-func (vr *vehiclePostgresRepo) List(ctx context.Context, specification vehicle.VehicleSpectification) (*[]vehicle.Vehicle, error) {
+func (vr *vehiclePostgresRepo) List(ctx context.Context, specification *vehicle.VehicleSpectification) (*[]vehicle.Vehicle, error) {
 	var vehicleDTOs []dto.VehicleDTO
 
 	query := vr.db.NewSelect().Model(&vehicleDTOs).Order("id ASC")

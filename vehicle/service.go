@@ -44,7 +44,7 @@ func (s *Service) GetByRenavam(ctx context.Context, renavam string) (*Vehicle, e
 	return vehicle, nil
 }
 
-func (s *Service) List(ctx context.Context, specification VehicleSpectification) (*[]Vehicle, error) {
+func (s *Service) List(ctx context.Context, specification *VehicleSpectification) (*[]Vehicle, error) {
 	vehicles, err := s.repo.List(ctx, specification)
 	if err != nil {
 		return nil, err

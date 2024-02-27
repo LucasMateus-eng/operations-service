@@ -86,7 +86,7 @@ func (mr *MockReadingMockRecorder) GetByRenavam(ctx, renavam any) *gomock.Call {
 }
 
 // List mocks base method.
-func (m *MockReading) List(ctx context.Context, specification vehicle.VehicleSpectification) (*[]vehicle.Vehicle, error) {
+func (m *MockReading) List(ctx context.Context, specification *vehicle.VehicleSpectification) (*[]vehicle.Vehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ctx, specification)
 	ret0, _ := ret[0].(*[]vehicle.Vehicle)
@@ -264,7 +264,7 @@ func (mr *MockRepositoryMockRecorder) GetByRenavam(ctx, renavam any) *gomock.Cal
 }
 
 // List mocks base method.
-func (m *MockRepository) List(ctx context.Context, specification vehicle.VehicleSpectification) (*[]vehicle.Vehicle, error) {
+func (m *MockRepository) List(ctx context.Context, specification *vehicle.VehicleSpectification) (*[]vehicle.Vehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ctx, specification)
 	ret0, _ := ret[0].(*[]vehicle.Vehicle)
@@ -390,7 +390,7 @@ func (mr *MockUseCaseMockRecorder) GetByVehicleId(ctx, id any) *gomock.Call {
 }
 
 // List mocks base method.
-func (m *MockUseCase) List(ctx context.Context, specification vehicle.VehicleSpectification) (*[]vehicle.Vehicle, error) {
+func (m *MockUseCase) List(ctx context.Context, specification *vehicle.VehicleSpectification) (*[]vehicle.Vehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ctx, specification)
 	ret0, _ := ret[0].(*[]vehicle.Vehicle)
