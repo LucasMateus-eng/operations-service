@@ -31,13 +31,11 @@ type Driver struct {
 	LegalInformation DriverLegalInformation
 	Address          *address.Address
 	Contact          Contact
-	Vehicles         vehicle.VehicleList
+	Vehicles         []vehicle.Vehicle
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	DeletedAt        time.Time
 }
-
-type DriverList []Driver
 
 type DriverSpecification struct {
 	Page, PageSize int

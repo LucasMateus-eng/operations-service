@@ -39,8 +39,8 @@ type Repository interface {
 
 type UseCase interface {
 	GetByID(ctx context.Context, driverID, vehicleID int64) (*DriverVehicle, error)
-	GetDriverListByVehicleID(ctx context.Context, specification *DriverVehicleSpecification) (*[]driver.DriverList, error)
-	GetVehicleListByDriverID(ctx context.Context, specification *DriverVehicleSpecification) (*[]vehicle.VehicleList, error)
+	GetDriverListByVehicleID(ctx context.Context, specification *DriverVehicleSpecification) (*[]driver.Driver, error)
+	GetVehicleListByDriverID(ctx context.Context, specification *DriverVehicleSpecification) (*[]vehicle.Vehicle, error)
 	Create(ctx context.Context, dv *DriverVehicle) (int64, error)
 	Delete(ctx context.Context, driverID, vehicleID int64) error
 }

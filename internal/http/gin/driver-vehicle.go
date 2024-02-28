@@ -4,57 +4,23 @@ import (
 	"context"
 	"net/http"
 	"strconv"
-	"time"
 
 	drivervehicle "github.com/LucasMateus-eng/operations-service/driver-vehicle"
+	gin_dto "github.com/LucasMateus-eng/operations-service/internal/http/gin/dto"
+	gin_mapping "github.com/LucasMateus-eng/operations-service/internal/http/gin/mapping"
 	"github.com/LucasMateus-eng/operations-service/internal/logging"
 	"github.com/gin-gonic/gin"
 )
 
-type driverVehicleOutputDTO struct {
-	DriverID  int       `json:"driver_id"`
-	VehicleID int       `json:"vehicle_id"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
-	DeletedAt time.Time `json:"deleted_at,omitempty"`
-}
-
-type driverVehicleInputDTO struct {
-	DriverID  int `json:"driver_id" binding:"required"`
-	VehicleID int `json:"vehicle_id" binding:"required"`
-}
-
-type driverVehicleSpectificationInputDTO struct {
-	Page     int `form:"page" binding:"required"`
-	PageSize int `form:"pageSize" binding:"required"`
-}
-
-func mapDriverVehicleToOutputDTO(driverVehicle drivervehicle.DriverVehicle) *driverVehicleOutputDTO {
-	return &driverVehicleOutputDTO{
-		DriverID:  driverVehicle.DriverID,
-		VehicleID: driverVehicle.VehicleID,
-		CreatedAt: driverVehicle.CreatedAt,
-		UpdatedAt: driverVehicle.UpdatedAt,
-		DeletedAt: driverVehicle.DeletedAt,
-	}
-}
-
-func mapInputDTOToDriverVehicle(input driverVehicleInputDTO) *drivervehicle.DriverVehicle {
-	return &drivervehicle.DriverVehicle{
-		DriverID:  input.DriverID,
-		VehicleID: input.VehicleID,
-	}
-}
-
 func listDriversByVehicleID(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		vehicleID, err := strconv.Atoi(c.Param("vehicle_id"))
+		vehicleID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		var ds driverVehicleSpectificationInputDTO
+		var ds gin_dto.DriverVehicleSpectificationInputDTO
 		if err := c.ShouldBindQuery(&ds); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
@@ -77,9 +43,9 @@ func listDriversByVehicleID(ctx context.Context, service *drivervehicle.Service,
 			return
 		}
 
-		driversDTO := make([]driverOutputDTO, 0, len(*drivers))
+		driversDTO := make([]gin_dto.DriverOutputDTO, 0, len(*drivers))
 		for _, dv := range *drivers {
-			driversDTO = append(driversDTO, *mapDriverToOutputDTO(dv))
+			driversDTO = append(driversDTO, *gin_mapping.MapDriverToOutputDTO(dv))
 		}
 
 		c.JSON(http.StatusOK, driversDTO)
@@ -88,13 +54,13 @@ func listDriversByVehicleID(ctx context.Context, service *drivervehicle.Service,
 
 func listVehiclesByDriverID(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		driverID, err := strconv.Atoi(c.Param("driver_id"))
+		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		var ds driverVehicleSpectificationInputDTO
+		var ds gin_dto.DriverVehicleSpectificationInputDTO
 		if err := c.ShouldBindQuery(&ds); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
@@ -117,9 +83,9 @@ func listVehiclesByDriverID(ctx context.Context, service *drivervehicle.Service,
 			return
 		}
 
-		vehiclesDTO := make([]vehicleOutputDTO, 0, len(*vehicles))
+		vehiclesDTO := make([]gin_dto.VehicleOutputDTO, 0, len(*vehicles))
 		for _, v := range *vehicles {
-			vehiclesDTO = append(vehiclesDTO, *mapVehicleToOutputDTO(v))
+			vehiclesDTO = append(vehiclesDTO, *gin_mapping.MapVehicleToOutputDTO(v))
 		}
 
 		c.JSON(http.StatusOK, vehiclesDTO)
@@ -128,13 +94,13 @@ func listVehiclesByDriverID(ctx context.Context, service *drivervehicle.Service,
 
 func createDriverVehicle(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var dto driverVehicleInputDTO
+		var dto gin_dto.DriverVehicleInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		driverVehicle := mapInputDTOToDriverVehicle(dto)
+		driverVehicle := gin_mapping.MapInputDTOToDriverVehicle(dto)
 
 		driverVehicle, err := service.Create(ctx, driverVehicle)
 		if err != nil {
@@ -142,7 +108,7 @@ func createDriverVehicle(ctx context.Context, service *drivervehicle.Service, lo
 			return
 		}
 
-		outputDTO := mapDriverVehicleToOutputDTO(*driverVehicle)
+		outputDTO := gin_mapping.MapDriverVehicleToOutputDTO(*driverVehicle)
 
 		c.JSON(http.StatusOK, outputDTO)
 	}
@@ -150,13 +116,13 @@ func createDriverVehicle(ctx context.Context, service *drivervehicle.Service, lo
 
 func deleteDriverVehicle(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		driverID, err := strconv.Atoi(c.Param("driver_id"))
+		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		vehicleID, err := strconv.Atoi(c.Param("vehicle_id"))
+		vehicleID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return

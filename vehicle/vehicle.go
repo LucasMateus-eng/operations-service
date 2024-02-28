@@ -124,8 +124,6 @@ type Vehicle struct {
 	DeletedAt        time.Time
 }
 
-type VehicleList []Vehicle
-
 type VehicleSpectification struct {
 	Attributes     VehicleAttributes
 	Licensing      Licensing

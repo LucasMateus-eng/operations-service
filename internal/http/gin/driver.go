@@ -6,9 +6,10 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/LucasMateus-eng/operations-service/driver"
+	gin_dto "github.com/LucasMateus-eng/operations-service/internal/http/gin/dto"
+	gin_mapping "github.com/LucasMateus-eng/operations-service/internal/http/gin/mapping"
 	"github.com/LucasMateus-eng/operations-service/internal/logging"
 	"github.com/gin-gonic/gin"
 )
@@ -21,89 +22,9 @@ var (
 	ErrEmptyDriverList = errors.New("no driver records found for the query parameters used")
 )
 
-type driverOutputDTO struct {
-	ID            int                `json:"id"`
-	UserID        int                `json:"user_id,omitempty"`
-	Name          string             `json:"name,omitempty"`
-	DateOfBirth   time.Time          `json:"date_of_birth,omitempty"`
-	RG            string             `json:"rg,omitempty"`
-	CPF           string             `json:"cpf,omitempty"`
-	DriverLicense string             `json:"driver_license,omitempty"`
-	CellPhone     string             `json:"cell_phone,omitempty"`
-	Email         string             `json:"email,omitempty"`
-	Address       *addressOutputDTO  `json:"address,omitempty"`
-	Vehicles      []vehicleOutputDTO `json:"vehicles,omitempty"`
-	CreatedAt     time.Time          `json:"created_at,omitempty"`
-	UpdatedAt     time.Time          `json:"updated_at,omitempty"`
-	DeletedAt     time.Time          `json:"deleted_at,omitempty"`
-}
-
-type driverInputDTO struct {
-	ID            int       `json:"id"`
-	UserID        int       `json:"user_id" binding:"required"`
-	Name          string    `json:"name" binding:"required"`
-	DateOfBirth   time.Time `json:"date_of_birth" binding:"required"`
-	RG            string    `json:"rg" binding:"required"`
-	CPF           string    `json:"cpf" binding:"required"`
-	DriverLicense string    `json:"driver_license" binding:"required"`
-	CellPhone     string    `json:"cell_phone" binding:"required"`
-	Email         string    `json:"email" binding:"required"`
-}
-
-func mapDriverToOutputDTO(driver driver.Driver) *driverOutputDTO {
-	return &driverOutputDTO{
-		ID:            driver.ID,
-		UserID:        driver.UserID,
-		Name:          driver.Attributes.Name,
-		DateOfBirth:   driver.Attributes.DateOfBirth,
-		RG:            driver.LegalInformation.RG,
-		CPF:           driver.LegalInformation.CPF,
-		DriverLicense: driver.LegalInformation.DriverLicense,
-		CellPhone:     driver.Contact.CellPhone,
-		Email:         driver.Contact.Email,
-		Address:       mapAddressToOutputDTO(*driver.Address),
-		Vehicles:      mapVehicleListToOutputDTO(driver.Vehicles),
-		CreatedAt:     driver.CreatedAt,
-		UpdatedAt:     driver.UpdatedAt,
-		DeletedAt:     driver.DeletedAt,
-	}
-}
-
-func mapInputDTOToDriver(input driverInputDTO) *driver.Driver {
-	return &driver.Driver{
-		ID:     input.ID,
-		UserID: input.UserID,
-		Attributes: driver.DriverAttributes{
-			Name:        input.Name,
-			DateOfBirth: input.DateOfBirth,
-		},
-		LegalInformation: driver.DriverLegalInformation{
-			RG:            input.RG,
-			CPF:           input.CPF,
-			DriverLicense: input.DriverLicense,
-		},
-		Contact: driver.Contact{
-			CellPhone: input.CellPhone,
-			Email:     input.Email,
-		},
-	}
-}
-
-type driverSpecificationInputDTO struct {
-	Page     int `form:"page" binding:"required"`
-	PageSize int `form:"pageSize" binding:"required"`
-}
-
-func mapInputDTOToDriverSpecification(input driverSpecificationInputDTO) *driver.DriverSpecification {
-	return &driver.DriverSpecification{
-		Page:     input.Page,
-		PageSize: input.PageSize,
-	}
-}
-
 func listDrivers(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var ds driverSpecificationInputDTO
+		var ds gin_dto.DriverSpecificationInputDTO
 		if err := c.ShouldBindQuery(&ds); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
@@ -120,7 +41,7 @@ func listDrivers(ctx context.Context, service *driver.Service, logger *logging.L
 			return
 		}
 
-		driverSpecification := mapInputDTOToDriverSpecification(ds)
+		driverSpecification := gin_mapping.MapInputDTOToDriverSpecification(ds)
 
 		var drivers *[]driver.Driver
 		if isEagerLoading {
@@ -139,9 +60,9 @@ func listDrivers(ctx context.Context, service *driver.Service, logger *logging.L
 			return
 		}
 
-		driversDTO := make([]driverOutputDTO, 0, len(*drivers))
+		driversDTO := make([]gin_dto.DriverOutputDTO, 0, len(*drivers))
 		for _, dv := range *drivers {
-			driversDTO = append(driversDTO, *mapDriverToOutputDTO(dv))
+			driversDTO = append(driversDTO, *gin_mapping.MapDriverToOutputDTO(dv))
 		}
 
 		c.JSON(http.StatusOK, driversDTO)
@@ -150,13 +71,13 @@ func listDrivers(ctx context.Context, service *driver.Service, logger *logging.L
 
 func createDriver(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var dto driverInputDTO
+		var dto gin_dto.DriverInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		driver := mapInputDTOToDriver(dto)
+		driver := gin_mapping.MapInputDTOToDriver(dto)
 
 		driverID, err := service.Create(ctx, driver)
 		if err != nil {
@@ -164,13 +85,13 @@ func createDriver(ctx context.Context, service *driver.Service, logger *logging.
 			return
 		}
 
-		c.JSON(http.StatusOK, driverOutputDTO{ID: driverID})
+		c.JSON(http.StatusOK, gin_dto.DriverOutputDTO{ID: driverID})
 	}
 }
 
 func getDriver(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		driverID, err := strconv.Atoi(c.Param("id"))
+		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
@@ -182,7 +103,7 @@ func getDriver(ctx context.Context, service *driver.Service, logger *logging.Log
 			return
 		}
 
-		outputDTO := mapDriverToOutputDTO(*driver)
+		outputDTO := gin_mapping.MapDriverToOutputDTO(*driver)
 
 		c.JSON(http.StatusOK, outputDTO)
 	}
@@ -190,19 +111,19 @@ func getDriver(ctx context.Context, service *driver.Service, logger *logging.Log
 
 func updateDriver(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		driverID, err := strconv.Atoi(c.Param("id"))
+		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		var dto driverInputDTO
+		var dto gin_dto.DriverInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		driver := mapInputDTOToDriver(dto)
+		driver := gin_mapping.MapInputDTOToDriver(dto)
 		driver.ID = driverID
 
 		err = service.Update(ctx, driver)
@@ -217,7 +138,7 @@ func updateDriver(ctx context.Context, service *driver.Service, logger *logging.
 
 func deleteDriver(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		driverID, err := strconv.Atoi(c.Param("id"))
+		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
