@@ -6,10 +6,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-const (
-	DEFAULT_CONFIG_FILE = "./.env"
-)
-
 type Config struct {
 	AppName        string `mapstructure:"APP_NAME"`
 	AppEnv         string `mapstructure:"APP_ENV"`
@@ -22,9 +18,11 @@ type Config struct {
 	DBName         string `mapstructure:"DB_NAME"`
 }
 
-func NewConfig() *Config {
+func NewConfig(configType, configName, configPath string) *Config {
 	config := Config{}
-	viper.SetConfigFile(DEFAULT_CONFIG_FILE)
+	viper.SetConfigType(configType)
+	viper.SetConfigName(configName)
+	viper.AddConfigPath(configPath)
 
 	err := viper.ReadInConfig()
 	if err != nil {
