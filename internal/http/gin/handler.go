@@ -58,8 +58,8 @@ func Handlers(ctx context.Context, db *bun.DB, logger *logging.Logging) *gin.Eng
 	dvGroup := v1.Group("drivers-vehicles")
 	{
 		dvGroup.POST("/", createDriverVehicle(ctx, driverVehicleService, logger))
-		dvGroup.GET("/:driver_id", listVehiclesByDriverID(ctx, driverVehicleService, logger))
-		dvGroup.GET("/:vehicle_id", listDriversByVehicleID(ctx, driverVehicleService, logger))
+		dvGroup.GET("/vehicles/:driver_id", listVehiclesByDriverID(ctx, driverVehicleService, logger))
+		dvGroup.GET("/drivers/:vehicle_id", listDriversByVehicleID(ctx, driverVehicleService, logger))
 		dvGroup.DELETE("/:driver_id/:vehicle_id", deleteDriverVehicle(ctx, driverVehicleService, logger))
 	}
 
