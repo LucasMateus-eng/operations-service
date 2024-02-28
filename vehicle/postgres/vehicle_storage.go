@@ -20,7 +20,7 @@ func New(db *bun.DB) *vehiclePostgresRepo {
 	}
 }
 
-func (vr *vehiclePostgresRepo) GetById(ctx context.Context, id int) (*vehicle.Vehicle, error) {
+func (vr *vehiclePostgresRepo) GetById(ctx context.Context, id int64) (*vehicle.Vehicle, error) {
 	var vehicleDTO dto.VehicleDTO
 
 	err := vr.db.NewSelect().Model(&vehicleDTO).Where("id = ?", id).Scan(ctx)
@@ -116,8 +116,8 @@ func (vr *vehiclePostgresRepo) List(ctx context.Context, specification *vehicle.
 	return &vehicles, nil
 }
 
-func (vr *vehiclePostgresRepo) Create(ctx context.Context, v *vehicle.Vehicle) (int, error) {
-	var vehicleID int
+func (vr *vehiclePostgresRepo) Create(ctx context.Context, v *vehicle.Vehicle) (int64, error) {
+	var vehicleID int64
 
 	vehicleDTO := mapping.MapVehicleToDTO(v)
 
@@ -143,7 +143,7 @@ func (vr *vehiclePostgresRepo) Update(ctx context.Context, v *vehicle.Vehicle) e
 	return err
 }
 
-func (vr *vehiclePostgresRepo) Delete(ctx context.Context, id int) error {
+func (vr *vehiclePostgresRepo) Delete(ctx context.Context, id int64) error {
 	_, err := vr.db.NewDelete().Model((*dto.VehicleDTO)(nil)).Where("id = ?", id).Exec(ctx)
 	return err
 }

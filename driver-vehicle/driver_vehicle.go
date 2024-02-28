@@ -9,27 +9,27 @@ import (
 )
 
 type DriverVehicle struct {
-	DriverID  int
-	VehicleID int
+	DriverID  int64
+	VehicleID int64
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt time.Time
 }
 
 type DriverVehicleSpecification struct {
-	VehicleID, DriverID,
-	Page, PageSize int
+	VehicleID, DriverID int64
+	Page, PageSize      int
 }
 
 type Reading interface {
-	GetByID(ctx context.Context, driverID, vehicleID int) (*DriverVehicle, error)
+	GetByID(ctx context.Context, driverID, vehicleID int64) (*DriverVehicle, error)
 	GetDriverListByVehicleID(ctx context.Context, specification *DriverVehicleSpecification) (*[]driver.Driver, error)
 	GetVehicleListByDriverID(ctx context.Context, specification *DriverVehicleSpecification) (*[]vehicle.Vehicle, error)
 }
 
 type Writing interface {
 	Create(ctx context.Context, dv *DriverVehicle) (*DriverVehicle, error)
-	Delete(ctx context.Context, driverID, vehicleID int) error
+	Delete(ctx context.Context, driverID, vehicleID int64) error
 }
 
 type Repository interface {
@@ -38,9 +38,9 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetByID(ctx context.Context, driverID, vehicleID int) (*DriverVehicle, error)
+	GetByID(ctx context.Context, driverID, vehicleID int64) (*DriverVehicle, error)
 	GetDriverListByVehicleID(ctx context.Context, specification *DriverVehicleSpecification) (*[]driver.DriverList, error)
 	GetVehicleListByDriverID(ctx context.Context, specification *DriverVehicleSpecification) (*[]vehicle.VehicleList, error)
-	Create(ctx context.Context, dv *DriverVehicle) (int, error)
-	Delete(ctx context.Context, driverID, vehicleID int) error
+	Create(ctx context.Context, dv *DriverVehicle) (int64, error)
+	Delete(ctx context.Context, driverID, vehicleID int64) error
 }

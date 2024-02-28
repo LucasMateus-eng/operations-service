@@ -22,12 +22,14 @@ type driverVehiclePostgresRepo struct {
 }
 
 func New(db *bun.DB) *driverVehiclePostgresRepo {
+	db.RegisterModel((*dto.DriverVehicleDTO)(nil))
+
 	return &driverVehiclePostgresRepo{
 		db: db,
 	}
 }
 
-func (dr *driverVehiclePostgresRepo) GetByID(ctx context.Context, driverID, vehicleID int) (*driver_vehicle.DriverVehicle, error) {
+func (dr *driverVehiclePostgresRepo) GetByID(ctx context.Context, driverID, vehicleID int64) (*driver_vehicle.DriverVehicle, error) {
 	var driverVehicleDTO dto.DriverVehicleDTO
 
 	err := dr.db.NewSelect().
@@ -146,7 +148,7 @@ func (dr *driverVehiclePostgresRepo) Create(ctx context.Context, dv *driver_vehi
 	return nil, errors.New("driver or vehicle does not exist")
 }
 
-func (dr *driverVehiclePostgresRepo) Delete(ctx context.Context, driverID, vehicleID int) error {
+func (dr *driverVehiclePostgresRepo) Delete(ctx context.Context, driverID, vehicleID int64) error {
 	_, err := dr.db.NewDelete().Model((*dto.DriverVehicleDTO)(nil)).
 		Where("driver_id = ? AND vehicle_id = ?", driverID, vehicleID).
 		Exec(ctx)

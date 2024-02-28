@@ -25,8 +25,8 @@ type Contact struct {
 }
 
 type Driver struct {
-	ID               int
-	UserID           int
+	ID               int64
+	UserID           int64
 	Attributes       DriverAttributes
 	LegalInformation DriverLegalInformation
 	Address          *address.Address
@@ -44,18 +44,18 @@ type DriverSpecification struct {
 }
 
 type Reading interface {
-	GetById(ctx context.Context, id int) (*Driver, error)
-	GetByUserId(ctx context.Context, userId int) (*Driver, error)
-	GetByIdWithEagerLoading(ctx context.Context, id int) (*Driver, error)
-	GetByUserIdWithEagerLoading(ctx context.Context, userId int) (*Driver, error)
+	GetById(ctx context.Context, id int64) (*Driver, error)
+	GetByUserId(ctx context.Context, userId int64) (*Driver, error)
+	GetByIdWithEagerLoading(ctx context.Context, id int64) (*Driver, error)
+	GetByUserIdWithEagerLoading(ctx context.Context, userId int64) (*Driver, error)
 	List(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 	ListWithEagerLoading(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 }
 
 type Writing interface {
-	Create(ctx context.Context, d *Driver) (int, error)
+	Create(ctx context.Context, d *Driver) (int64, error)
 	Update(ctx context.Context, d *Driver) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id int64) error
 }
 
 type Repository interface {
@@ -64,13 +64,13 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetByDriverId(ctx context.Context, id int) (*Driver, error)
-	GetByUserId(ctx context.Context, userId int) (*Driver, error)
-	GetByIdWithEagerLoading(ctx context.Context, id int) (*Driver, error)
-	GetByUserIdWithEagerLoading(ctx context.Context, userId int) (*Driver, error)
+	GetByDriverId(ctx context.Context, id int64) (*Driver, error)
+	GetByUserId(ctx context.Context, userId int64) (*Driver, error)
+	GetByIdWithEagerLoading(ctx context.Context, id int64) (*Driver, error)
+	GetByUserIdWithEagerLoading(ctx context.Context, userId int64) (*Driver, error)
 	List(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 	ListWithEagerLoading(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
-	Create(ctx context.Context, d *Driver) (int, error)
+	Create(ctx context.Context, d *Driver) (int64, error)
 	Update(ctx context.Context, d *Driver) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id int64) error
 }

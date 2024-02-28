@@ -19,7 +19,7 @@ func New(db *bun.DB) *addressPostgresRepo {
 	}
 }
 
-func (ar *addressPostgresRepo) GetById(ctx context.Context, id int) (*address.Address, error) {
+func (ar *addressPostgresRepo) GetById(ctx context.Context, id int64) (*address.Address, error) {
 	var addressDTO dto.AddressDTO
 
 	err := ar.db.NewSelect().Model(&addressDTO).Where("id = ?", id).Scan(ctx)
@@ -35,7 +35,7 @@ func (ar *addressPostgresRepo) GetById(ctx context.Context, id int) (*address.Ad
 	return mappedValue, nil
 }
 
-func (ar *addressPostgresRepo) GetByUserID(ctx context.Context, userID int) (*address.Address, error) {
+func (ar *addressPostgresRepo) GetByUserID(ctx context.Context, userID int64) (*address.Address, error) {
 	var addressDTO dto.AddressDTO
 
 	err := ar.db.NewSelect().Model(&addressDTO).Where("user_id = ?", userID).Scan(ctx)
@@ -51,8 +51,8 @@ func (ar *addressPostgresRepo) GetByUserID(ctx context.Context, userID int) (*ad
 	return mappedValue, nil
 }
 
-func (ar *addressPostgresRepo) Create(ctx context.Context, a *address.Address) (int, error) {
-	var addressID int
+func (ar *addressPostgresRepo) Create(ctx context.Context, a *address.Address) (int64, error) {
+	var addressID int64
 
 	addressDTO := mapping.MapAddressToDTO(a)
 
@@ -78,7 +78,7 @@ func (ar *addressPostgresRepo) Update(ctx context.Context, a *address.Address) e
 	return err
 }
 
-func (ar *addressPostgresRepo) Delete(ctx context.Context, id int) error {
+func (ar *addressPostgresRepo) Delete(ctx context.Context, id int64) error {
 	_, err := ar.db.NewDelete().Model((*dto.AddressDTO)(nil)).Where("id = ?", id).Exec(ctx)
 	return err
 }

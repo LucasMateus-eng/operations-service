@@ -101,7 +101,7 @@ func (r Role) IsDriver() bool {
 }
 
 type User struct {
-	ID             int
+	ID             int64
 	Username       string
 	HashedPassword string
 	Role           Role
@@ -111,15 +111,15 @@ type User struct {
 }
 
 type Reading interface {
-	GetById(ctx context.Context, id int) (*User, error)
+	GetById(ctx context.Context, id int64) (*User, error)
 	GetByUsername(ctx context.Context, username string) (*User, error)
 	GetByRole(ctx context.Context, role Role) (*User, error)
 }
 
 type Writing interface {
-	Create(ctx context.Context, u *User) (int, error)
+	Create(ctx context.Context, u *User) (int64, error)
 	Update(ctx context.Context, u *User) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id int64) error
 }
 
 type Repository interface {
@@ -128,10 +128,10 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetById(ctx context.Context, id int) (*User, error)
+	GetById(ctx context.Context, id int64) (*User, error)
 	GetByUsername(ctx context.Context, username string) (*User, error)
 	GetByRole(ctx context.Context, role Role) (*User, error)
-	Create(ctx context.Context, u *User) (int, error)
+	Create(ctx context.Context, u *User) (int64, error)
 	Update(ctx context.Context, u *User) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id int64) error
 }

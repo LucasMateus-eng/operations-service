@@ -11,9 +11,9 @@ import (
 type DriverVehicleDTO struct {
 	bun.BaseModel `bun:"table:drivers_vehicles"`
 
-	DriverID  int                    `bun:"driver_id,pk"`
+	DriverID  int64                  `bun:"driver_id,pk"`
 	Driver    driver_dto.DriverDTO   `bun:"rel:belongs-to,join:driver_id=id"`
-	VehicleID int                    `bun:"vehicle_id,pk"`
+	VehicleID int64                  `bun:"vehicle_id,pk"`
 	Vehicle   vehicle_dto.VehicleDTO `bun:"rel:belongs-to,join:vehicle_id=id"`
 	CreatedAt time.Time              `bun:"created_at,nullzero,notnull,default:current_timestamp"`
 	UpdatedAt time.Time              `bun:"updated_at,nullzero,notnull,default:current_timestamp"`

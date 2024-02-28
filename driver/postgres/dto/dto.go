@@ -11,7 +11,7 @@ import (
 type DriverDTO struct {
 	bun.BaseModel `bun:"table:drivers"`
 
-	ID            int                      `bun:"id,pk"`
+	ID            int64                    `bun:"id,pk,autoincrement"`
 	Name          string                   `bun:"name,notnull"`
 	RG            string                   `bun:"rg,notnull,unique"`
 	CPF           string                   `bun:"cpf,notnull,unique"`
@@ -19,7 +19,7 @@ type DriverDTO struct {
 	DateOfBirth   time.Time                `bun:"date_of_birth,notnull"`
 	CellPhone     string                   `bun:"cell_phone,notnull"`
 	Email         string                   `bun:"email,notnull"`
-	UserID        int                      `bun:"user_id,notnull,unique"`
+	UserID        int64                    `bun:"user_id,notnull,unique"`
 	User          user_dto.UserDTO         `bun:"rel:belongs-to,join:user_id=id"`
 	Vehicles      []vehicle_dto.VehicleDTO `bun:"m2m:drivers_vehicles,join:Driver=Vehicle"`
 	CreatedAt     time.Time                `bun:"created_at,nullzero,notnull,default:current_timestamp"`

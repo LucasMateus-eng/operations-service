@@ -209,8 +209,8 @@ func (bs *BrazilianState) UnmarshalJSON(data []byte) (err error) {
 }
 
 type Address struct {
-	ID           int
-	UserID       int
+	ID           int64
+	UserID       int64
 	Locality     string
 	Number       string
 	Complement   string
@@ -225,14 +225,14 @@ type Address struct {
 }
 
 type Reading interface {
-	GetById(ctx context.Context, id int) (*Address, error)
-	GetByUserID(ctx context.Context, userID int) (*Address, error)
+	GetById(ctx context.Context, id int64) (*Address, error)
+	GetByUserID(ctx context.Context, userID int64) (*Address, error)
 }
 
 type Writing interface {
-	Create(ctx context.Context, a *Address) (int, error)
+	Create(ctx context.Context, a *Address) (int64, error)
 	Update(ctx context.Context, a *Address) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id int64) error
 }
 
 type Repository interface {
@@ -241,9 +241,9 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetById(ctx context.Context, id int) (*Address, error)
-	GetByUserID(ctx context.Context, userID int) (*Address, error)
-	Create(ctx context.Context, a *Address) (int, error)
+	GetById(ctx context.Context, id int64) (*Address, error)
+	GetByUserID(ctx context.Context, userID int64) (*Address, error)
+	Create(ctx context.Context, a *Address) (int64, error)
 	Update(ctx context.Context, a *Address) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id int64) error
 }

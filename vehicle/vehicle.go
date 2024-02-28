@@ -116,7 +116,7 @@ type VehicleAttributes struct {
 }
 
 type Vehicle struct {
-	ID               int
+	ID               int64
 	Attributes       VehicleAttributes
 	LegalInformation VehicleLegalInformation
 	CreatedAt        time.Time
@@ -133,16 +133,16 @@ type VehicleSpectification struct {
 }
 
 type Reading interface {
-	GetById(ctx context.Context, id int) (*Vehicle, error)
+	GetById(ctx context.Context, id int64) (*Vehicle, error)
 	GetByPlate(ctx context.Context, plate string) (*Vehicle, error)
 	GetByRenavam(ctx context.Context, renavam string) (*Vehicle, error)
 	List(ctx context.Context, specification *VehicleSpectification) (*[]Vehicle, error)
 }
 
 type Writing interface {
-	Create(ctx context.Context, v *Vehicle) (int, error)
+	Create(ctx context.Context, v *Vehicle) (int64, error)
 	Update(ctx context.Context, v *Vehicle) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id int64) error
 }
 
 type Repository interface {
@@ -151,11 +151,11 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetByVehicleId(ctx context.Context, id int) (*Vehicle, error)
+	GetByVehicleId(ctx context.Context, id int64) (*Vehicle, error)
 	GetByPlate(ctx context.Context, plate string) (*Vehicle, error)
 	GetByRenavam(ctx context.Context, renavam string) (*Vehicle, error)
 	List(ctx context.Context, specification *VehicleSpectification) (*[]Vehicle, error)
-	Create(ctx context.Context, v *Vehicle) (int, error)
+	Create(ctx context.Context, v *Vehicle) (int64, error)
 	Update(ctx context.Context, v *Vehicle) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id int64) error
 }

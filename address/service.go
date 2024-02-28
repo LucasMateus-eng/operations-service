@@ -18,7 +18,7 @@ func NewService(r Repository, l *logging.Logging) *Service {
 	}
 }
 
-func (s *Service) GetById(ctx context.Context, id int) (*Address, error) {
+func (s *Service) GetById(ctx context.Context, id int64) (*Address, error) {
 	address, err := s.repo.GetById(ctx, id)
 	if err != nil {
 		return nil, err
@@ -27,7 +27,7 @@ func (s *Service) GetById(ctx context.Context, id int) (*Address, error) {
 	return address, nil
 }
 
-func (s *Service) GetByUserID(ctx context.Context, userID int) (*Address, error) {
+func (s *Service) GetByUserID(ctx context.Context, userID int64) (*Address, error) {
 	address, err := s.repo.GetByUserID(ctx, userID)
 	if err != nil {
 		return nil, err
@@ -36,7 +36,7 @@ func (s *Service) GetByUserID(ctx context.Context, userID int) (*Address, error)
 	return address, nil
 }
 
-func (s *Service) Create(ctx context.Context, a *Address) (int, error) {
+func (s *Service) Create(ctx context.Context, a *Address) (int64, error) {
 	addressID, err := s.repo.Create(ctx, a)
 	if err != nil {
 		return 0, err
@@ -49,6 +49,6 @@ func (s *Service) Update(ctx context.Context, a *Address) error {
 	return s.repo.Update(ctx, a)
 }
 
-func (s *Service) Delete(ctx context.Context, id int) error {
+func (s *Service) Delete(ctx context.Context, id int64) error {
 	return s.repo.Delete(ctx, id)
 }

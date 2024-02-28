@@ -20,7 +20,7 @@ func New(db *bun.DB) *userPostgresRepo {
 	}
 }
 
-func (ur *userPostgresRepo) GetById(ctx context.Context, id int) (*user.User, error) {
+func (ur *userPostgresRepo) GetById(ctx context.Context, id int64) (*user.User, error) {
 	var userDTO dto.UserDTO
 
 	err := ur.db.NewSelect().Model(&userDTO).Where("id = ?", id).Scan(ctx)
@@ -68,8 +68,8 @@ func (ur *userPostgresRepo) GetByRole(ctx context.Context, role user.Role) (*use
 	return mappedValue, nil
 }
 
-func (ur *userPostgresRepo) Create(ctx context.Context, u *user.User) (int, error) {
-	var userID int
+func (ur *userPostgresRepo) Create(ctx context.Context, u *user.User) (int64, error) {
+	var userID int64
 
 	userDTO := mapping.MapUserToDTO(u)
 
@@ -95,7 +95,7 @@ func (ur *userPostgresRepo) Update(ctx context.Context, u *user.User) error {
 	return err
 }
 
-func (ur *userPostgresRepo) Delete(ctx context.Context, id int) error {
+func (ur *userPostgresRepo) Delete(ctx context.Context, id int64) error {
 	_, err := ur.db.NewDelete().Model((*dto.UserDTO)(nil)).Where("id = ?", id).Exec(ctx)
 	return err
 }

@@ -21,7 +21,7 @@ func New(db *bun.DB) *driverPostgresRepo {
 	}
 }
 
-func (dr *driverPostgresRepo) GetById(ctx context.Context, id int) (*driver.Driver, error) {
+func (dr *driverPostgresRepo) GetById(ctx context.Context, id int64) (*driver.Driver, error) {
 	var driverDTO dto.DriverDTO
 
 	err := dr.db.NewSelect().Model(&driverDTO).Where("id = ?", id).Scan(ctx)
@@ -37,7 +37,7 @@ func (dr *driverPostgresRepo) GetById(ctx context.Context, id int) (*driver.Driv
 	return mappedValue, nil
 }
 
-func (dr *driverPostgresRepo) GetByUserId(ctx context.Context, userId int) (*driver.Driver, error) {
+func (dr *driverPostgresRepo) GetByUserId(ctx context.Context, userId int64) (*driver.Driver, error) {
 	var driverDTO dto.DriverDTO
 
 	err := dr.db.NewSelect().Model(&driverDTO).Where("user_id = ?", userId).Scan(ctx)
@@ -56,7 +56,7 @@ func (dr *driverPostgresRepo) GetByUserId(ctx context.Context, userId int) (*dri
 	return mappedValue, nil
 }
 
-func (dr *driverPostgresRepo) GetByIdWithEagerLoading(ctx context.Context, id int) (*driver.Driver, error) {
+func (dr *driverPostgresRepo) GetByIdWithEagerLoading(ctx context.Context, id int64) (*driver.Driver, error) {
 	var driverDTO dto.DriverDTO
 
 	err := dr.db.NewSelect().Model(&driverDTO).
@@ -80,7 +80,7 @@ func (dr *driverPostgresRepo) GetByIdWithEagerLoading(ctx context.Context, id in
 	return mappedValue, nil
 }
 
-func (dr *driverPostgresRepo) GetByUserIdWithEagerLoading(ctx context.Context, userId int) (*driver.Driver, error) {
+func (dr *driverPostgresRepo) GetByUserIdWithEagerLoading(ctx context.Context, userId int64) (*driver.Driver, error) {
 	var driverDTO dto.DriverDTO
 
 	err := dr.db.NewSelect().Model(&driverDTO).
@@ -165,8 +165,8 @@ func (dr *driverPostgresRepo) ListWithEagerLoading(ctx context.Context, specific
 	return &drivers, nil
 }
 
-func (dr *driverPostgresRepo) Create(ctx context.Context, d *driver.Driver) (int, error) {
-	var driverID int
+func (dr *driverPostgresRepo) Create(ctx context.Context, d *driver.Driver) (int64, error) {
+	var driverID int64
 
 	driverDTO := mapping.MapDriverToDTO(d)
 
@@ -192,7 +192,7 @@ func (dr *driverPostgresRepo) Update(ctx context.Context, d *driver.Driver) erro
 	return err
 }
 
-func (dr *driverPostgresRepo) Delete(ctx context.Context, id int) error {
+func (dr *driverPostgresRepo) Delete(ctx context.Context, id int64) error {
 	_, err := dr.db.NewDelete().Model((*dto.DriverDTO)(nil)).Where("id = ?", id).Exec(ctx)
 	return err
 }

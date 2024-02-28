@@ -9,7 +9,7 @@ import (
 type VehicleDTO struct {
 	bun.BaseModel `bun:"table:vehicles"`
 
-	ID                  int       `bun:"id,pk"`
+	ID                  int64     `bun:"id,pk,autoincrement"`
 	Brand               string    `bun:"brand,notnull"`
 	Model               string    `bun:"model,notnull"`
 	YearOfManufacture   time.Time `bun:"year_of_manufacture,notnull"`

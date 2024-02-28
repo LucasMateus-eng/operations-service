@@ -20,7 +20,7 @@ func NewService(r Repository, l *logging.Logging) *Service {
 	}
 }
 
-func (s *Service) GetByID(ctx context.Context, driverID, vehicleID int) (*DriverVehicle, error) {
+func (s *Service) GetByID(ctx context.Context, driverID, vehicleID int64) (*DriverVehicle, error) {
 	driverVehicle, err := s.repo.GetByID(ctx, driverID, vehicleID)
 	if err != nil {
 		return nil, err
@@ -56,6 +56,6 @@ func (s *Service) Create(ctx context.Context, dv *DriverVehicle) (*DriverVehicle
 	return driverVehicle, nil
 }
 
-func (s *Service) Delete(ctx context.Context, driverID, vehicleID int) error {
+func (s *Service) Delete(ctx context.Context, driverID, vehicleID int64) error {
 	return s.repo.Delete(ctx, driverID, vehicleID)
 }
