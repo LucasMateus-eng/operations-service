@@ -24,6 +24,8 @@ var (
 
 func listDrivers(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("List drivers", nil)
+
 		var ds gin_dto.DriverSpecificationInputDTO
 		if err := c.ShouldBindQuery(&ds); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -71,6 +73,8 @@ func listDrivers(ctx context.Context, service *driver.Service, logger *logging.L
 
 func createDriver(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Create driver", nil)
+
 		var dto gin_dto.DriverInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -91,6 +95,8 @@ func createDriver(ctx context.Context, service *driver.Service, logger *logging.
 
 func getDriver(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Get driver", nil)
+
 		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -111,6 +117,8 @@ func getDriver(ctx context.Context, service *driver.Service, logger *logging.Log
 
 func updateDriver(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Update driver", nil)
+
 		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -138,6 +146,8 @@ func updateDriver(ctx context.Context, service *driver.Service, logger *logging.
 
 func deleteDriver(ctx context.Context, service *driver.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Delete driver", nil)
+
 		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

@@ -14,6 +14,8 @@ import (
 
 func listDriversByVehicleID(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("List drivers by vehicle id", nil)
+
 		vehicleID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -54,6 +56,8 @@ func listDriversByVehicleID(ctx context.Context, service *drivervehicle.Service,
 
 func listVehiclesByDriverID(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("List vehicles by driver id", nil)
+
 		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -94,6 +98,8 @@ func listVehiclesByDriverID(ctx context.Context, service *drivervehicle.Service,
 
 func createDriverVehicle(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Create driver vehicle association", nil)
+
 		var dto gin_dto.DriverVehicleInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -116,6 +122,8 @@ func createDriverVehicle(ctx context.Context, service *drivervehicle.Service, lo
 
 func deleteDriverVehicle(ctx context.Context, service *drivervehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Delete driver vehicle association", nil)
+
 		driverID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

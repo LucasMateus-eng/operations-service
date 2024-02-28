@@ -19,6 +19,8 @@ var (
 
 func listVehicles(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("List vehicles", nil)
+
 		var vs gin_dto.VehicleSpecificationInputDTO
 		if err := c.ShouldBindQuery(&vs); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -49,6 +51,8 @@ func listVehicles(ctx context.Context, service *vehicle.Service, logger *logging
 
 func getVehicle(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Get vehicle", nil)
+
 		vehicleID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -69,6 +73,8 @@ func getVehicle(ctx context.Context, service *vehicle.Service, logger *logging.L
 
 func createVehicle(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Create vehicle", nil)
+
 		var dto gin_dto.VehicleInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -89,6 +95,8 @@ func createVehicle(ctx context.Context, service *vehicle.Service, logger *loggin
 
 func updateVehicle(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Update vehicle", nil)
+
 		vehicleID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -116,6 +124,8 @@ func updateVehicle(ctx context.Context, service *vehicle.Service, logger *loggin
 
 func deleteVehicle(ctx context.Context, service *vehicle.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Delete vehicle", nil)
+
 		vehicleID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

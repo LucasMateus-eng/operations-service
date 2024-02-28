@@ -14,6 +14,8 @@ import (
 
 func getUser(ctx context.Context, service *user.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Get user", nil)
+
 		userID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -34,6 +36,8 @@ func getUser(ctx context.Context, service *user.Service, logger *logging.Logging
 
 func createUser(ctx context.Context, service *user.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Create user", nil)
+
 		var dto gin_dto.UserInputDTO
 		if err := c.ShouldBindJSON(&dto); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -54,6 +58,8 @@ func createUser(ctx context.Context, service *user.Service, logger *logging.Logg
 
 func updateUser(ctx context.Context, service *user.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Update user", nil)
+
 		userID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -81,6 +87,8 @@ func updateUser(ctx context.Context, service *user.Service, logger *logging.Logg
 
 func deleteUser(ctx context.Context, service *user.Service, logger *logging.Logging) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.Info("Delete user", nil)
+
 		userID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
