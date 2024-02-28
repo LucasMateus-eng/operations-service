@@ -43,7 +43,7 @@ func (m *MockReading) EXPECT() *MockReadingMockRecorder {
 }
 
 // GetByID mocks base method.
-func (m *MockReading) GetByID(ctx context.Context, driverID, vehicleID int) (*drivervehicle.DriverVehicle, error) {
+func (m *MockReading) GetByID(ctx context.Context, driverID, vehicleID int64) (*drivervehicle.DriverVehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetByID", ctx, driverID, vehicleID)
 	ret0, _ := ret[0].(*drivervehicle.DriverVehicle)
@@ -126,7 +126,7 @@ func (mr *MockWritingMockRecorder) Create(ctx, dv any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockWriting) Delete(ctx context.Context, driverID, vehicleID int) error {
+func (m *MockWriting) Delete(ctx context.Context, driverID, vehicleID int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, driverID, vehicleID)
 	ret0, _ := ret[0].(error)
@@ -178,7 +178,7 @@ func (mr *MockRepositoryMockRecorder) Create(ctx, dv any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockRepository) Delete(ctx context.Context, driverID, vehicleID int) error {
+func (m *MockRepository) Delete(ctx context.Context, driverID, vehicleID int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, driverID, vehicleID)
 	ret0, _ := ret[0].(error)
@@ -192,7 +192,7 @@ func (mr *MockRepositoryMockRecorder) Delete(ctx, driverID, vehicleID any) *gomo
 }
 
 // GetByID mocks base method.
-func (m *MockRepository) GetByID(ctx context.Context, driverID, vehicleID int) (*drivervehicle.DriverVehicle, error) {
+func (m *MockRepository) GetByID(ctx context.Context, driverID, vehicleID int64) (*drivervehicle.DriverVehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetByID", ctx, driverID, vehicleID)
 	ret0, _ := ret[0].(*drivervehicle.DriverVehicle)
@@ -260,10 +260,10 @@ func (m *MockUseCase) EXPECT() *MockUseCaseMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockUseCase) Create(ctx context.Context, dv *drivervehicle.DriverVehicle) (int, error) {
+func (m *MockUseCase) Create(ctx context.Context, dv *drivervehicle.DriverVehicle) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, dv)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -275,7 +275,7 @@ func (mr *MockUseCaseMockRecorder) Create(ctx, dv any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockUseCase) Delete(ctx context.Context, driverID, vehicleID int) error {
+func (m *MockUseCase) Delete(ctx context.Context, driverID, vehicleID int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, driverID, vehicleID)
 	ret0, _ := ret[0].(error)
@@ -289,7 +289,7 @@ func (mr *MockUseCaseMockRecorder) Delete(ctx, driverID, vehicleID any) *gomock.
 }
 
 // GetByID mocks base method.
-func (m *MockUseCase) GetByID(ctx context.Context, driverID, vehicleID int) (*drivervehicle.DriverVehicle, error) {
+func (m *MockUseCase) GetByID(ctx context.Context, driverID, vehicleID int64) (*drivervehicle.DriverVehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetByID", ctx, driverID, vehicleID)
 	ret0, _ := ret[0].(*drivervehicle.DriverVehicle)
@@ -304,10 +304,10 @@ func (mr *MockUseCaseMockRecorder) GetByID(ctx, driverID, vehicleID any) *gomock
 }
 
 // GetDriverListByVehicleID mocks base method.
-func (m *MockUseCase) GetDriverListByVehicleID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]driver.DriverList, error) {
+func (m *MockUseCase) GetDriverListByVehicleID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]driver.Driver, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetDriverListByVehicleID", ctx, specification)
-	ret0, _ := ret[0].(*[]driver.DriverList)
+	ret0, _ := ret[0].(*[]driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -319,10 +319,10 @@ func (mr *MockUseCaseMockRecorder) GetDriverListByVehicleID(ctx, specification a
 }
 
 // GetVehicleListByDriverID mocks base method.
-func (m *MockUseCase) GetVehicleListByDriverID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]vehicle.VehicleList, error) {
+func (m *MockUseCase) GetVehicleListByDriverID(ctx context.Context, specification *drivervehicle.DriverVehicleSpecification) (*[]vehicle.Vehicle, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetVehicleListByDriverID", ctx, specification)
-	ret0, _ := ret[0].(*[]vehicle.VehicleList)
+	ret0, _ := ret[0].(*[]vehicle.Vehicle)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
