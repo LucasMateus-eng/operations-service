@@ -3,25 +3,27 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	"os"
 
+	"github.com/LucasMateus-eng/operations-service/config"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/driver/pgdriver"
 )
 
-func buildPostgreSQLConnDSN() string {
-	host := os.Getenv("DB_HOST")
-	username := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASS")
-	dbName := os.Getenv("DB_NAME")
-	port := os.Getenv("DB_PORT")
+func buildPostgreSQLConnDSN(config *config.Config) string {
+	username := config.DBUser
+	password := config.DBPass
+	host := config.DBHost
+	port := config.DBPort
+	database := config.DBName
 
-	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=America/Sao_Paulo", host, username, password, dbName, port)
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable&timezone=America/Sao_Paulo", username, password, host, port, database)
+
+	return dsn
 }
 
-func InitPostgreSQL() *bun.DB {
-	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(buildPostgreSQLConnDSN())))
+func InitPostgreSQL(config *config.Config) *bun.DB {
+	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(buildPostgreSQLConnDSN(config))))
 
 	db := bun.NewDB(sqldb, pgdialect.New())
 
