@@ -19,8 +19,14 @@ func NewService(r Repository, l *logging.Logging) *Service {
 }
 
 func (s *Service) GetById(ctx context.Context, id int64) (*Address, error) {
+	s.logger.Debug("[ADDRESS] GetById - DEBUG: ", map[string]any{
+		"addressID": id,
+	})
 	address, err := s.repo.GetById(ctx, id)
 	if err != nil {
+		s.logger.Error("[ADDRESS] GetById - ERROR: ", map[string]any{
+			"err": err.Error(),
+		})
 		return nil, err
 	}
 
@@ -28,8 +34,14 @@ func (s *Service) GetById(ctx context.Context, id int64) (*Address, error) {
 }
 
 func (s *Service) GetByUserID(ctx context.Context, userID int64) (*Address, error) {
+	s.logger.Debug("[ADDRESS] GetByUserID - DEBUG: ", map[string]any{
+		"userID": userID,
+	})
 	address, err := s.repo.GetByUserID(ctx, userID)
 	if err != nil {
+		s.logger.Error("[ADDRESS] GetByUserID - ERROR: ", map[string]any{
+			"err": err.Error(),
+		})
 		return nil, err
 	}
 
@@ -37,8 +49,14 @@ func (s *Service) GetByUserID(ctx context.Context, userID int64) (*Address, erro
 }
 
 func (s *Service) Create(ctx context.Context, a *Address) (int64, error) {
+	s.logger.Debug("[ADDRESS] Create - DEBUG: ", map[string]any{
+		"address": a,
+	})
 	addressID, err := s.repo.Create(ctx, a)
 	if err != nil {
+		s.logger.Error("[ADDRESS] Create - ERROR: ", map[string]any{
+			"err": err.Error(),
+		})
 		return 0, err
 	}
 
@@ -46,9 +64,31 @@ func (s *Service) Create(ctx context.Context, a *Address) (int64, error) {
 }
 
 func (s *Service) Update(ctx context.Context, a *Address) error {
-	return s.repo.Update(ctx, a)
+	s.logger.Debug("[ADDRESS] Update - DEBUG: ", map[string]any{
+		"address": a,
+	})
+	err := s.repo.Update(ctx, a)
+	if err != nil {
+		s.logger.Error("[ADDRESS] Update - ERROR: ", map[string]any{
+			"err": err.Error(),
+		})
+		return err
+	}
+
+	return nil
 }
 
 func (s *Service) Delete(ctx context.Context, id int64) error {
-	return s.repo.Delete(ctx, id)
+	s.logger.Debug("[ADDRESS] Delete - DEBUG: ", map[string]any{
+		"addressID": id,
+	})
+	err := s.repo.Delete(ctx, id)
+	if err != nil {
+		s.logger.Error("[ADDRESS] Delete - ERROR: ", map[string]any{
+			"err": err.Error(),
+		})
+		return err
+	}
+
+	return nil
 }
