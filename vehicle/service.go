@@ -18,13 +18,13 @@ func NewService(r Repository, l *logging.Logging) *Service {
 	}
 }
 
-func (s *Service) GetByVehicleId(ctx context.Context, id int64) (*Vehicle, error) {
-	s.logger.Debug("[VEHICLE] GetByVehicleId - DEBUG: ", map[string]any{
+func (s *Service) GetByID(ctx context.Context, id int64) (*Vehicle, error) {
+	s.logger.Debug("[VEHICLE] GetByID - DEBUG: ", map[string]any{
 		"vehicleID": id,
 	})
-	vehicle, err := s.repo.GetById(ctx, id)
+	vehicle, err := s.repo.GetByID(ctx, id)
 	if err != nil {
-		s.logger.Error("[VEHICLE] GetByVehicleId - ERROR: ", map[string]any{
+		s.logger.Error("[VEHICLE] GetByID - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
 		return nil, err

@@ -20,7 +20,7 @@ func New(db *bun.DB) *vehiclePostgresRepo {
 	}
 }
 
-func (vr *vehiclePostgresRepo) GetById(ctx context.Context, id int64) (*vehicle.Vehicle, error) {
+func (vr *vehiclePostgresRepo) GetByID(ctx context.Context, id int64) (*vehicle.Vehicle, error) {
 	var vehicleDTO dto.VehicleDTO
 
 	err := vr.db.NewSelect().Model(&vehicleDTO).Where("id = ?", id).Scan(ctx)

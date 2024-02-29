@@ -40,19 +40,19 @@ func (m *MockReading) EXPECT() *MockReadingMockRecorder {
 	return m.recorder
 }
 
-// GetById mocks base method.
-func (m *MockReading) GetById(ctx context.Context, id int) (*vehicle.Vehicle, error) {
+// GetByID mocks base method.
+func (m *MockReading) GetByID(ctx context.Context, id int64) (*vehicle.Vehicle, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetById", ctx, id)
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
 	ret0, _ := ret[0].(*vehicle.Vehicle)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetById indicates an expected call of GetById.
-func (mr *MockReadingMockRecorder) GetById(ctx, id any) *gomock.Call {
+// GetByID indicates an expected call of GetByID.
+func (mr *MockReadingMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockReading)(nil).GetById), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockReading)(nil).GetByID), ctx, id)
 }
 
 // GetByPlate mocks base method.
@@ -124,10 +124,10 @@ func (m *MockWriting) EXPECT() *MockWritingMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockWriting) Create(ctx context.Context, v *vehicle.Vehicle) (int, error) {
+func (m *MockWriting) Create(ctx context.Context, v *vehicle.Vehicle) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, v)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -139,7 +139,7 @@ func (mr *MockWritingMockRecorder) Create(ctx, v any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockWriting) Delete(ctx context.Context, id int) error {
+func (m *MockWriting) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -190,10 +190,10 @@ func (m *MockRepository) EXPECT() *MockRepositoryMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockRepository) Create(ctx context.Context, v *vehicle.Vehicle) (int, error) {
+func (m *MockRepository) Create(ctx context.Context, v *vehicle.Vehicle) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, v)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -205,7 +205,7 @@ func (mr *MockRepositoryMockRecorder) Create(ctx, v any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockRepository) Delete(ctx context.Context, id int) error {
+func (m *MockRepository) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -218,19 +218,19 @@ func (mr *MockRepositoryMockRecorder) Delete(ctx, id any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockRepository)(nil).Delete), ctx, id)
 }
 
-// GetById mocks base method.
-func (m *MockRepository) GetById(ctx context.Context, id int) (*vehicle.Vehicle, error) {
+// GetByID mocks base method.
+func (m *MockRepository) GetByID(ctx context.Context, id int64) (*vehicle.Vehicle, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetById", ctx, id)
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
 	ret0, _ := ret[0].(*vehicle.Vehicle)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetById indicates an expected call of GetById.
-func (mr *MockRepositoryMockRecorder) GetById(ctx, id any) *gomock.Call {
+// GetByID indicates an expected call of GetByID.
+func (mr *MockRepositoryMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockRepository)(nil).GetById), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockRepository)(nil).GetByID), ctx, id)
 }
 
 // GetByPlate mocks base method.
@@ -316,10 +316,10 @@ func (m *MockUseCase) EXPECT() *MockUseCaseMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockUseCase) Create(ctx context.Context, v *vehicle.Vehicle) (int, error) {
+func (m *MockUseCase) Create(ctx context.Context, v *vehicle.Vehicle) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, v)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -331,7 +331,7 @@ func (mr *MockUseCaseMockRecorder) Create(ctx, v any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockUseCase) Delete(ctx context.Context, id int) error {
+func (m *MockUseCase) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -342,6 +342,21 @@ func (m *MockUseCase) Delete(ctx context.Context, id int) error {
 func (mr *MockUseCaseMockRecorder) Delete(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockUseCase)(nil).Delete), ctx, id)
+}
+
+// GetByID mocks base method.
+func (m *MockUseCase) GetByID(ctx context.Context, id int64) (*vehicle.Vehicle, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
+	ret0, _ := ret[0].(*vehicle.Vehicle)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByID indicates an expected call of GetByID.
+func (mr *MockUseCaseMockRecorder) GetByID(ctx, id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockUseCase)(nil).GetByID), ctx, id)
 }
 
 // GetByPlate mocks base method.
@@ -372,21 +387,6 @@ func (m *MockUseCase) GetByRenavam(ctx context.Context, renavam string) (*vehicl
 func (mr *MockUseCaseMockRecorder) GetByRenavam(ctx, renavam any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByRenavam", reflect.TypeOf((*MockUseCase)(nil).GetByRenavam), ctx, renavam)
-}
-
-// GetByVehicleId mocks base method.
-func (m *MockUseCase) GetByVehicleId(ctx context.Context, id int) (*vehicle.Vehicle, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByVehicleId", ctx, id)
-	ret0, _ := ret[0].(*vehicle.Vehicle)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetByVehicleId indicates an expected call of GetByVehicleId.
-func (mr *MockUseCaseMockRecorder) GetByVehicleId(ctx, id any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByVehicleId", reflect.TypeOf((*MockUseCase)(nil).GetByVehicleId), ctx, id)
 }
 
 // List mocks base method.

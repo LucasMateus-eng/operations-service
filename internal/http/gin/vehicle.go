@@ -59,7 +59,7 @@ func getVehicle(ctx context.Context, service *vehicle.Service, logger *logging.L
 			return
 		}
 
-		vehicle, err := service.GetByVehicleId(ctx, vehicleID)
+		vehicle, err := service.GetByID(ctx, vehicleID)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return

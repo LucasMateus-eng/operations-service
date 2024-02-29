@@ -131,7 +131,7 @@ type VehicleSpectification struct {
 }
 
 type Reading interface {
-	GetById(ctx context.Context, id int64) (*Vehicle, error)
+	GetByID(ctx context.Context, id int64) (*Vehicle, error)
 	GetByPlate(ctx context.Context, plate string) (*Vehicle, error)
 	GetByRenavam(ctx context.Context, renavam string) (*Vehicle, error)
 	List(ctx context.Context, specification *VehicleSpectification) (*[]Vehicle, error)
@@ -149,7 +149,7 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetByVehicleId(ctx context.Context, id int64) (*Vehicle, error)
+	GetByID(ctx context.Context, id int64) (*Vehicle, error)
 	GetByPlate(ctx context.Context, plate string) (*Vehicle, error)
 	GetByRenavam(ctx context.Context, renavam string) (*Vehicle, error)
 	List(ctx context.Context, specification *VehicleSpectification) (*[]Vehicle, error)
