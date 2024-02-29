@@ -57,7 +57,7 @@ func (s *Service) GetByIDWithEagerLoading(ctx context.Context, id int64) (*Drive
 		s.logger.Error("[DRIVER] GetByIDWithEagerLoading - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
-		return driver, nil
+		return nil, err
 	}
 
 	return driver, nil
@@ -72,7 +72,7 @@ func (s *Service) GetByUserIDWithEagerLoading(ctx context.Context, userId int64)
 		s.logger.Error("[DRIVER] GetByUserIDWithEagerLoading - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
-		return driver, nil
+		return nil, err
 	}
 
 	return driver, nil
