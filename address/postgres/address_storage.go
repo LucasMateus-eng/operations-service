@@ -19,7 +19,7 @@ func New(db *bun.DB) *addressPostgresRepo {
 	}
 }
 
-func (ar *addressPostgresRepo) GetById(ctx context.Context, id int64) (*address.Address, error) {
+func (ar *addressPostgresRepo) GetByID(ctx context.Context, id int64) (*address.Address, error) {
 	var addressDTO dto.AddressDTO
 
 	err := ar.db.NewSelect().Model(&addressDTO).Where("id = ?", id).Scan(ctx)

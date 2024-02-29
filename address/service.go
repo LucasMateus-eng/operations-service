@@ -18,13 +18,13 @@ func NewService(r Repository, l *logging.Logging) *Service {
 	}
 }
 
-func (s *Service) GetById(ctx context.Context, id int64) (*Address, error) {
-	s.logger.Debug("[ADDRESS] GetById - DEBUG: ", map[string]any{
+func (s *Service) GetByID(ctx context.Context, id int64) (*Address, error) {
+	s.logger.Debug("[ADDRESS] GetByID - DEBUG: ", map[string]any{
 		"addressID": id,
 	})
-	address, err := s.repo.GetById(ctx, id)
+	address, err := s.repo.GetByID(ctx, id)
 	if err != nil {
-		s.logger.Error("[ADDRESS] GetById - ERROR: ", map[string]any{
+		s.logger.Error("[ADDRESS] GetByID - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
 		return nil, err

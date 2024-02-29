@@ -225,7 +225,7 @@ type Address struct {
 }
 
 type Reading interface {
-	GetById(ctx context.Context, id int64) (*Address, error)
+	GetByID(ctx context.Context, id int64) (*Address, error)
 	GetByUserID(ctx context.Context, userID int64) (*Address, error)
 }
 
@@ -241,7 +241,7 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetById(ctx context.Context, id int64) (*Address, error)
+	GetByID(ctx context.Context, id int64) (*Address, error)
 	GetByUserID(ctx context.Context, userID int64) (*Address, error)
 	Create(ctx context.Context, a *Address) (int64, error)
 	Update(ctx context.Context, a *Address) error

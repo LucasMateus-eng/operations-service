@@ -40,23 +40,23 @@ func (m *MockReading) EXPECT() *MockReadingMockRecorder {
 	return m.recorder
 }
 
-// GetById mocks base method.
-func (m *MockReading) GetById(ctx context.Context, id int) (*address.Address, error) {
+// GetByID mocks base method.
+func (m *MockReading) GetByID(ctx context.Context, id int64) (*address.Address, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetById", ctx, id)
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
 	ret0, _ := ret[0].(*address.Address)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetById indicates an expected call of GetById.
-func (mr *MockReadingMockRecorder) GetById(ctx, id any) *gomock.Call {
+// GetByID indicates an expected call of GetByID.
+func (mr *MockReadingMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockReading)(nil).GetById), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockReading)(nil).GetByID), ctx, id)
 }
 
 // GetByUserID mocks base method.
-func (m *MockReading) GetByUserID(ctx context.Context, userID int) (*address.Address, error) {
+func (m *MockReading) GetByUserID(ctx context.Context, userID int64) (*address.Address, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetByUserID", ctx, userID)
 	ret0, _ := ret[0].(*address.Address)
@@ -94,10 +94,10 @@ func (m *MockWriting) EXPECT() *MockWritingMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockWriting) Create(ctx context.Context, a *address.Address) (int, error) {
+func (m *MockWriting) Create(ctx context.Context, a *address.Address) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, a)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -109,7 +109,7 @@ func (mr *MockWritingMockRecorder) Create(ctx, a any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockWriting) Delete(ctx context.Context, id int) error {
+func (m *MockWriting) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -160,10 +160,10 @@ func (m *MockRepository) EXPECT() *MockRepositoryMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockRepository) Create(ctx context.Context, a *address.Address) (int, error) {
+func (m *MockRepository) Create(ctx context.Context, a *address.Address) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, a)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -175,7 +175,7 @@ func (mr *MockRepositoryMockRecorder) Create(ctx, a any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockRepository) Delete(ctx context.Context, id int) error {
+func (m *MockRepository) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -188,23 +188,23 @@ func (mr *MockRepositoryMockRecorder) Delete(ctx, id any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockRepository)(nil).Delete), ctx, id)
 }
 
-// GetById mocks base method.
-func (m *MockRepository) GetById(ctx context.Context, id int) (*address.Address, error) {
+// GetByID mocks base method.
+func (m *MockRepository) GetByID(ctx context.Context, id int64) (*address.Address, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetById", ctx, id)
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
 	ret0, _ := ret[0].(*address.Address)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetById indicates an expected call of GetById.
-func (mr *MockRepositoryMockRecorder) GetById(ctx, id any) *gomock.Call {
+// GetByID indicates an expected call of GetByID.
+func (mr *MockRepositoryMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockRepository)(nil).GetById), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockRepository)(nil).GetByID), ctx, id)
 }
 
 // GetByUserID mocks base method.
-func (m *MockRepository) GetByUserID(ctx context.Context, userID int) (*address.Address, error) {
+func (m *MockRepository) GetByUserID(ctx context.Context, userID int64) (*address.Address, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetByUserID", ctx, userID)
 	ret0, _ := ret[0].(*address.Address)
@@ -256,10 +256,10 @@ func (m *MockUseCase) EXPECT() *MockUseCaseMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockUseCase) Create(ctx context.Context, a *address.Address) (int, error) {
+func (m *MockUseCase) Create(ctx context.Context, a *address.Address) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, a)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -271,7 +271,7 @@ func (mr *MockUseCaseMockRecorder) Create(ctx, a any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockUseCase) Delete(ctx context.Context, id int) error {
+func (m *MockUseCase) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -284,23 +284,23 @@ func (mr *MockUseCaseMockRecorder) Delete(ctx, id any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockUseCase)(nil).Delete), ctx, id)
 }
 
-// GetById mocks base method.
-func (m *MockUseCase) GetById(ctx context.Context, id int) (*address.Address, error) {
+// GetByID mocks base method.
+func (m *MockUseCase) GetByID(ctx context.Context, id int64) (*address.Address, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetById", ctx, id)
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
 	ret0, _ := ret[0].(*address.Address)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetById indicates an expected call of GetById.
-func (mr *MockUseCaseMockRecorder) GetById(ctx, id any) *gomock.Call {
+// GetByID indicates an expected call of GetByID.
+func (mr *MockUseCaseMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockUseCase)(nil).GetById), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockUseCase)(nil).GetByID), ctx, id)
 }
 
 // GetByUserID mocks base method.
-func (m *MockUseCase) GetByUserID(ctx context.Context, userID int) (*address.Address, error) {
+func (m *MockUseCase) GetByUserID(ctx context.Context, userID int64) (*address.Address, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetByUserID", ctx, userID)
 	ret0, _ := ret[0].(*address.Address)
