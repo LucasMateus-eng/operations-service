@@ -22,7 +22,7 @@ func getUser(ctx context.Context, service *user.Service, logger *logging.Logging
 			return
 		}
 
-		user, err := service.GetById(ctx, userID)
+		user, err := service.GetByID(ctx, userID)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return

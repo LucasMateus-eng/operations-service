@@ -20,7 +20,7 @@ func New(db *bun.DB) *userPostgresRepo {
 	}
 }
 
-func (ur *userPostgresRepo) GetById(ctx context.Context, id int64) (*user.User, error) {
+func (ur *userPostgresRepo) GetByID(ctx context.Context, id int64) (*user.User, error) {
 	var userDTO dto.UserDTO
 
 	err := ur.db.NewSelect().Model(&userDTO).Where("id = ?", id).Scan(ctx)

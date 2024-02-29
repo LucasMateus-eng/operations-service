@@ -111,7 +111,7 @@ type User struct {
 }
 
 type Reading interface {
-	GetById(ctx context.Context, id int64) (*User, error)
+	GetByID(ctx context.Context, id int64) (*User, error)
 	GetByUsername(ctx context.Context, username string) (*User, error)
 	GetByRole(ctx context.Context, role Role) (*User, error)
 }
@@ -128,7 +128,7 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetById(ctx context.Context, id int64) (*User, error)
+	GetByID(ctx context.Context, id int64) (*User, error)
 	GetByUsername(ctx context.Context, username string) (*User, error)
 	GetByRole(ctx context.Context, role Role) (*User, error)
 	Create(ctx context.Context, u *User) (int64, error)
