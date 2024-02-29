@@ -24,7 +24,7 @@ func (s *Service) GetByID(ctx context.Context, id int64) (*Driver, error) {
 	})
 	driver, err := s.repo.GetByID(ctx, id)
 	if err != nil {
-		s.logger.Error("[DRIVER] GetByDriverID - ERROR: ", map[string]any{
+		s.logger.Error("[DRIVER] GetByID - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
 		return nil, err
