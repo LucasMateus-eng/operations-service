@@ -20,14 +20,8 @@ var (
 	errMocked             = errors.New("some error")
 	mockedContext         = context.Background()
 	expectedDriverVehicle = &drivervehicle.DriverVehicle{DriverID: 1, VehicleID: 1}
-	expectedDriver        = &driver.Driver{
-		ID: 1,
-	}
-	expectedDrivers = &[]driver.Driver{
-		*expectedDriver,
-	}
-	expectedAddress = &address.Address{ID: 1}
-	expectedVehicle = &vehicle.Vehicle{
+	expectedAddress       = &address.Address{ID: 1}
+	expectedVehicle       = &vehicle.Vehicle{
 		ID: 1,
 	}
 	expectedVehicles = &[]vehicle.Vehicle{
@@ -142,9 +136,9 @@ func TestService_GetDriverListByVehicleID(t *testing.T) {
 				},
 			},
 			prepareMock: func(p args, m serviceMocks) {
-				m.repo.EXPECT().GetDriverListByVehicleID(p.ctx, p.specification).Return(expectedDrivers, nil)
+				m.repo.EXPECT().GetDriverListByVehicleID(p.ctx, p.specification).Return(expectedDriversWithEagerLoading, nil)
 			},
-			want:    expectedDrivers,
+			want:    expectedDriversWithEagerLoading,
 			wantErr: false,
 		},
 		{
