@@ -40,64 +40,64 @@ func (m *MockReading) EXPECT() *MockReadingMockRecorder {
 	return m.recorder
 }
 
-// GetById mocks base method.
-func (m *MockReading) GetById(ctx context.Context, id int) (*driver.Driver, error) {
+// GetByID mocks base method.
+func (m *MockReading) GetByID(ctx context.Context, id int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetById", ctx, id)
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetById indicates an expected call of GetById.
-func (mr *MockReadingMockRecorder) GetById(ctx, id any) *gomock.Call {
+// GetByID indicates an expected call of GetByID.
+func (mr *MockReadingMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockReading)(nil).GetById), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockReading)(nil).GetByID), ctx, id)
 }
 
-// GetByIdWithEagerLoading mocks base method.
-func (m *MockReading) GetByIdWithEagerLoading(ctx context.Context, id int) (*driver.Driver, error) {
+// GetByIDWithEagerLoading mocks base method.
+func (m *MockReading) GetByIDWithEagerLoading(ctx context.Context, id int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByIdWithEagerLoading", ctx, id)
+	ret := m.ctrl.Call(m, "GetByIDWithEagerLoading", ctx, id)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByIdWithEagerLoading indicates an expected call of GetByIdWithEagerLoading.
-func (mr *MockReadingMockRecorder) GetByIdWithEagerLoading(ctx, id any) *gomock.Call {
+// GetByIDWithEagerLoading indicates an expected call of GetByIDWithEagerLoading.
+func (mr *MockReadingMockRecorder) GetByIDWithEagerLoading(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByIdWithEagerLoading", reflect.TypeOf((*MockReading)(nil).GetByIdWithEagerLoading), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByIDWithEagerLoading", reflect.TypeOf((*MockReading)(nil).GetByIDWithEagerLoading), ctx, id)
 }
 
-// GetByUserId mocks base method.
-func (m *MockReading) GetByUserId(ctx context.Context, userId int) (*driver.Driver, error) {
+// GetByUserID mocks base method.
+func (m *MockReading) GetByUserID(ctx context.Context, userId int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByUserId", ctx, userId)
+	ret := m.ctrl.Call(m, "GetByUserID", ctx, userId)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByUserId indicates an expected call of GetByUserId.
-func (mr *MockReadingMockRecorder) GetByUserId(ctx, userId any) *gomock.Call {
+// GetByUserID indicates an expected call of GetByUserID.
+func (mr *MockReadingMockRecorder) GetByUserID(ctx, userId any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserId", reflect.TypeOf((*MockReading)(nil).GetByUserId), ctx, userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserID", reflect.TypeOf((*MockReading)(nil).GetByUserID), ctx, userId)
 }
 
-// GetByUserIdWithEagerLoading mocks base method.
-func (m *MockReading) GetByUserIdWithEagerLoading(ctx context.Context, userId int) (*driver.Driver, error) {
+// GetByUserIDWithEagerLoading mocks base method.
+func (m *MockReading) GetByUserIDWithEagerLoading(ctx context.Context, userId int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByUserIdWithEagerLoading", ctx, userId)
+	ret := m.ctrl.Call(m, "GetByUserIDWithEagerLoading", ctx, userId)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByUserIdWithEagerLoading indicates an expected call of GetByUserIdWithEagerLoading.
-func (mr *MockReadingMockRecorder) GetByUserIdWithEagerLoading(ctx, userId any) *gomock.Call {
+// GetByUserIDWithEagerLoading indicates an expected call of GetByUserIDWithEagerLoading.
+func (mr *MockReadingMockRecorder) GetByUserIDWithEagerLoading(ctx, userId any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserIdWithEagerLoading", reflect.TypeOf((*MockReading)(nil).GetByUserIdWithEagerLoading), ctx, userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserIDWithEagerLoading", reflect.TypeOf((*MockReading)(nil).GetByUserIDWithEagerLoading), ctx, userId)
 }
 
 // List mocks base method.
@@ -154,10 +154,10 @@ func (m *MockWriting) EXPECT() *MockWritingMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockWriting) Create(ctx context.Context, d *driver.Driver) (int, error) {
+func (m *MockWriting) Create(ctx context.Context, d *driver.Driver) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, d)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -169,7 +169,7 @@ func (mr *MockWritingMockRecorder) Create(ctx, d any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockWriting) Delete(ctx context.Context, id int) error {
+func (m *MockWriting) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -220,10 +220,10 @@ func (m *MockRepository) EXPECT() *MockRepositoryMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockRepository) Create(ctx context.Context, d *driver.Driver) (int, error) {
+func (m *MockRepository) Create(ctx context.Context, d *driver.Driver) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, d)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -235,7 +235,7 @@ func (mr *MockRepositoryMockRecorder) Create(ctx, d any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockRepository) Delete(ctx context.Context, id int) error {
+func (m *MockRepository) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -248,64 +248,64 @@ func (mr *MockRepositoryMockRecorder) Delete(ctx, id any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockRepository)(nil).Delete), ctx, id)
 }
 
-// GetById mocks base method.
-func (m *MockRepository) GetById(ctx context.Context, id int) (*driver.Driver, error) {
+// GetByID mocks base method.
+func (m *MockRepository) GetByID(ctx context.Context, id int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetById", ctx, id)
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetById indicates an expected call of GetById.
-func (mr *MockRepositoryMockRecorder) GetById(ctx, id any) *gomock.Call {
+// GetByID indicates an expected call of GetByID.
+func (mr *MockRepositoryMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockRepository)(nil).GetById), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockRepository)(nil).GetByID), ctx, id)
 }
 
-// GetByIdWithEagerLoading mocks base method.
-func (m *MockRepository) GetByIdWithEagerLoading(ctx context.Context, id int) (*driver.Driver, error) {
+// GetByIDWithEagerLoading mocks base method.
+func (m *MockRepository) GetByIDWithEagerLoading(ctx context.Context, id int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByIdWithEagerLoading", ctx, id)
+	ret := m.ctrl.Call(m, "GetByIDWithEagerLoading", ctx, id)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByIdWithEagerLoading indicates an expected call of GetByIdWithEagerLoading.
-func (mr *MockRepositoryMockRecorder) GetByIdWithEagerLoading(ctx, id any) *gomock.Call {
+// GetByIDWithEagerLoading indicates an expected call of GetByIDWithEagerLoading.
+func (mr *MockRepositoryMockRecorder) GetByIDWithEagerLoading(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByIdWithEagerLoading", reflect.TypeOf((*MockRepository)(nil).GetByIdWithEagerLoading), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByIDWithEagerLoading", reflect.TypeOf((*MockRepository)(nil).GetByIDWithEagerLoading), ctx, id)
 }
 
-// GetByUserId mocks base method.
-func (m *MockRepository) GetByUserId(ctx context.Context, userId int) (*driver.Driver, error) {
+// GetByUserID mocks base method.
+func (m *MockRepository) GetByUserID(ctx context.Context, userId int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByUserId", ctx, userId)
+	ret := m.ctrl.Call(m, "GetByUserID", ctx, userId)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByUserId indicates an expected call of GetByUserId.
-func (mr *MockRepositoryMockRecorder) GetByUserId(ctx, userId any) *gomock.Call {
+// GetByUserID indicates an expected call of GetByUserID.
+func (mr *MockRepositoryMockRecorder) GetByUserID(ctx, userId any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserId", reflect.TypeOf((*MockRepository)(nil).GetByUserId), ctx, userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserID", reflect.TypeOf((*MockRepository)(nil).GetByUserID), ctx, userId)
 }
 
-// GetByUserIdWithEagerLoading mocks base method.
-func (m *MockRepository) GetByUserIdWithEagerLoading(ctx context.Context, userId int) (*driver.Driver, error) {
+// GetByUserIDWithEagerLoading mocks base method.
+func (m *MockRepository) GetByUserIDWithEagerLoading(ctx context.Context, userId int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByUserIdWithEagerLoading", ctx, userId)
+	ret := m.ctrl.Call(m, "GetByUserIDWithEagerLoading", ctx, userId)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByUserIdWithEagerLoading indicates an expected call of GetByUserIdWithEagerLoading.
-func (mr *MockRepositoryMockRecorder) GetByUserIdWithEagerLoading(ctx, userId any) *gomock.Call {
+// GetByUserIDWithEagerLoading indicates an expected call of GetByUserIDWithEagerLoading.
+func (mr *MockRepositoryMockRecorder) GetByUserIDWithEagerLoading(ctx, userId any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserIdWithEagerLoading", reflect.TypeOf((*MockRepository)(nil).GetByUserIdWithEagerLoading), ctx, userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserIDWithEagerLoading", reflect.TypeOf((*MockRepository)(nil).GetByUserIDWithEagerLoading), ctx, userId)
 }
 
 // List mocks base method.
@@ -376,10 +376,10 @@ func (m *MockUseCase) EXPECT() *MockUseCaseMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockUseCase) Create(ctx context.Context, d *driver.Driver) (int, error) {
+func (m *MockUseCase) Create(ctx context.Context, d *driver.Driver) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, d)
-	ret0, _ := ret[0].(int)
+	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -391,7 +391,7 @@ func (mr *MockUseCaseMockRecorder) Create(ctx, d any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *MockUseCase) Delete(ctx context.Context, id int) error {
+func (m *MockUseCase) Delete(ctx context.Context, id int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -404,64 +404,64 @@ func (mr *MockUseCaseMockRecorder) Delete(ctx, id any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockUseCase)(nil).Delete), ctx, id)
 }
 
-// GetByDriverId mocks base method.
-func (m *MockUseCase) GetByDriverId(ctx context.Context, id int) (*driver.Driver, error) {
+// GetByID mocks base method.
+func (m *MockUseCase) GetByID(ctx context.Context, id int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByDriverId", ctx, id)
+	ret := m.ctrl.Call(m, "GetByID", ctx, id)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByDriverId indicates an expected call of GetByDriverId.
-func (mr *MockUseCaseMockRecorder) GetByDriverId(ctx, id any) *gomock.Call {
+// GetByID indicates an expected call of GetByID.
+func (mr *MockUseCaseMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByDriverId", reflect.TypeOf((*MockUseCase)(nil).GetByDriverId), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockUseCase)(nil).GetByID), ctx, id)
 }
 
-// GetByIdWithEagerLoading mocks base method.
-func (m *MockUseCase) GetByIdWithEagerLoading(ctx context.Context, id int) (*driver.Driver, error) {
+// GetByIDWithEagerLoading mocks base method.
+func (m *MockUseCase) GetByIDWithEagerLoading(ctx context.Context, id int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByIdWithEagerLoading", ctx, id)
+	ret := m.ctrl.Call(m, "GetByIDWithEagerLoading", ctx, id)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByIdWithEagerLoading indicates an expected call of GetByIdWithEagerLoading.
-func (mr *MockUseCaseMockRecorder) GetByIdWithEagerLoading(ctx, id any) *gomock.Call {
+// GetByIDWithEagerLoading indicates an expected call of GetByIDWithEagerLoading.
+func (mr *MockUseCaseMockRecorder) GetByIDWithEagerLoading(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByIdWithEagerLoading", reflect.TypeOf((*MockUseCase)(nil).GetByIdWithEagerLoading), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByIDWithEagerLoading", reflect.TypeOf((*MockUseCase)(nil).GetByIDWithEagerLoading), ctx, id)
 }
 
-// GetByUserId mocks base method.
-func (m *MockUseCase) GetByUserId(ctx context.Context, userId int) (*driver.Driver, error) {
+// GetByUserID mocks base method.
+func (m *MockUseCase) GetByUserID(ctx context.Context, userId int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByUserId", ctx, userId)
+	ret := m.ctrl.Call(m, "GetByUserID", ctx, userId)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByUserId indicates an expected call of GetByUserId.
-func (mr *MockUseCaseMockRecorder) GetByUserId(ctx, userId any) *gomock.Call {
+// GetByUserID indicates an expected call of GetByUserID.
+func (mr *MockUseCaseMockRecorder) GetByUserID(ctx, userId any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserId", reflect.TypeOf((*MockUseCase)(nil).GetByUserId), ctx, userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserID", reflect.TypeOf((*MockUseCase)(nil).GetByUserID), ctx, userId)
 }
 
-// GetByUserIdWithEagerLoading mocks base method.
-func (m *MockUseCase) GetByUserIdWithEagerLoading(ctx context.Context, userId int) (*driver.Driver, error) {
+// GetByUserIDWithEagerLoading mocks base method.
+func (m *MockUseCase) GetByUserIDWithEagerLoading(ctx context.Context, userId int64) (*driver.Driver, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetByUserIdWithEagerLoading", ctx, userId)
+	ret := m.ctrl.Call(m, "GetByUserIDWithEagerLoading", ctx, userId)
 	ret0, _ := ret[0].(*driver.Driver)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetByUserIdWithEagerLoading indicates an expected call of GetByUserIdWithEagerLoading.
-func (mr *MockUseCaseMockRecorder) GetByUserIdWithEagerLoading(ctx, userId any) *gomock.Call {
+// GetByUserIDWithEagerLoading indicates an expected call of GetByUserIDWithEagerLoading.
+func (mr *MockUseCaseMockRecorder) GetByUserIDWithEagerLoading(ctx, userId any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserIdWithEagerLoading", reflect.TypeOf((*MockUseCase)(nil).GetByUserIdWithEagerLoading), ctx, userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByUserIDWithEagerLoading", reflect.TypeOf((*MockUseCase)(nil).GetByUserIDWithEagerLoading), ctx, userId)
 }
 
 // List mocks base method.

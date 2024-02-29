@@ -18,13 +18,13 @@ func NewService(r Repository, l *logging.Logging) *Service {
 	}
 }
 
-func (s *Service) GetByDriverId(ctx context.Context, id int64) (*Driver, error) {
-	s.logger.Debug("[DRIVER] GetByDriverId - DEBUG: ", map[string]any{
+func (s *Service) GetByID(ctx context.Context, id int64) (*Driver, error) {
+	s.logger.Debug("[DRIVER] GetByID - DEBUG: ", map[string]any{
 		"driverID": id,
 	})
-	driver, err := s.repo.GetById(ctx, id)
+	driver, err := s.repo.GetByID(ctx, id)
 	if err != nil {
-		s.logger.Error("[DRIVER] GetByDriverId - ERROR: ", map[string]any{
+		s.logger.Error("[DRIVER] GetByDriverID - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
 		return nil, err
@@ -33,13 +33,13 @@ func (s *Service) GetByDriverId(ctx context.Context, id int64) (*Driver, error) 
 	return driver, nil
 }
 
-func (s *Service) GetByUserId(ctx context.Context, userId int64) (*Driver, error) {
-	s.logger.Debug("[DRIVER] GetByUserId - DEBUG: ", map[string]any{
+func (s *Service) GetByUserID(ctx context.Context, userId int64) (*Driver, error) {
+	s.logger.Debug("[DRIVER] GetByUserID - DEBUG: ", map[string]any{
 		"userID": userId,
 	})
-	driver, err := s.repo.GetByUserId(ctx, userId)
+	driver, err := s.repo.GetByUserID(ctx, userId)
 	if err != nil {
-		s.logger.Error("[DRIVER] GetByUserId - ERROR: ", map[string]any{
+		s.logger.Error("[DRIVER] GetByUserID - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
 		return nil, err
@@ -48,13 +48,13 @@ func (s *Service) GetByUserId(ctx context.Context, userId int64) (*Driver, error
 	return driver, nil
 }
 
-func (s *Service) GetByIdWithEagerLoading(ctx context.Context, id int64) (*Driver, error) {
-	s.logger.Debug("[DRIVER] GetByIdWithEagerLoading - DEBUG: ", map[string]any{
+func (s *Service) GetByIDWithEagerLoading(ctx context.Context, id int64) (*Driver, error) {
+	s.logger.Debug("[DRIVER] GetByIDWithEagerLoading - DEBUG: ", map[string]any{
 		"driverID": id,
 	})
-	driver, err := s.repo.GetByIdWithEagerLoading(ctx, id)
+	driver, err := s.repo.GetByIDWithEagerLoading(ctx, id)
 	if err != nil {
-		s.logger.Error("[DRIVER] GetByIdWithEagerLoading - ERROR: ", map[string]any{
+		s.logger.Error("[DRIVER] GetByIDWithEagerLoading - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
 		return driver, nil
@@ -63,13 +63,13 @@ func (s *Service) GetByIdWithEagerLoading(ctx context.Context, id int64) (*Drive
 	return driver, nil
 }
 
-func (s *Service) GetByUserIdWithEagerLoading(ctx context.Context, userId int64) (*Driver, error) {
-	s.logger.Debug("[DRIVER] GetByUserIdWithEagerLoading - DEBUG: ", map[string]any{
+func (s *Service) GetByUserIDWithEagerLoading(ctx context.Context, userId int64) (*Driver, error) {
+	s.logger.Debug("[DRIVER] GetByUserIDWithEagerLoading - DEBUG: ", map[string]any{
 		"userID": userId,
 	})
-	driver, err := s.repo.GetByUserIdWithEagerLoading(ctx, userId)
+	driver, err := s.repo.GetByUserIDWithEagerLoading(ctx, userId)
 	if err != nil {
-		s.logger.Error("[DRIVER] GetByUserIdWithEagerLoading - ERROR: ", map[string]any{
+		s.logger.Error("[DRIVER] GetByUserIDWithEagerLoading - ERROR: ", map[string]any{
 			"err": err.Error(),
 		})
 		return driver, nil

@@ -103,7 +103,7 @@ func getDriver(ctx context.Context, service *driver.Service, logger *logging.Log
 			return
 		}
 
-		driver, err := service.GetByDriverId(ctx, driverID)
+		driver, err := service.GetByID(ctx, driverID)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return

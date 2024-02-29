@@ -21,7 +21,7 @@ func New(db *bun.DB) *driverPostgresRepo {
 	}
 }
 
-func (dr *driverPostgresRepo) GetById(ctx context.Context, id int64) (*driver.Driver, error) {
+func (dr *driverPostgresRepo) GetByID(ctx context.Context, id int64) (*driver.Driver, error) {
 	var driverDTO dto.DriverDTO
 
 	err := dr.db.NewSelect().Model(&driverDTO).Where("id = ?", id).Scan(ctx)
@@ -37,7 +37,7 @@ func (dr *driverPostgresRepo) GetById(ctx context.Context, id int64) (*driver.Dr
 	return mappedValue, nil
 }
 
-func (dr *driverPostgresRepo) GetByUserId(ctx context.Context, userId int64) (*driver.Driver, error) {
+func (dr *driverPostgresRepo) GetByUserID(ctx context.Context, userId int64) (*driver.Driver, error) {
 	var driverDTO dto.DriverDTO
 
 	err := dr.db.NewSelect().Model(&driverDTO).Where("user_id = ?", userId).Scan(ctx)
@@ -56,7 +56,7 @@ func (dr *driverPostgresRepo) GetByUserId(ctx context.Context, userId int64) (*d
 	return mappedValue, nil
 }
 
-func (dr *driverPostgresRepo) GetByIdWithEagerLoading(ctx context.Context, id int64) (*driver.Driver, error) {
+func (dr *driverPostgresRepo) GetByIDWithEagerLoading(ctx context.Context, id int64) (*driver.Driver, error) {
 	var driverDTO dto.DriverDTO
 
 	err := dr.db.NewSelect().Model(&driverDTO).
@@ -80,7 +80,7 @@ func (dr *driverPostgresRepo) GetByIdWithEagerLoading(ctx context.Context, id in
 	return mappedValue, nil
 }
 
-func (dr *driverPostgresRepo) GetByUserIdWithEagerLoading(ctx context.Context, userId int64) (*driver.Driver, error) {
+func (dr *driverPostgresRepo) GetByUserIDWithEagerLoading(ctx context.Context, userId int64) (*driver.Driver, error) {
 	var driverDTO dto.DriverDTO
 
 	err := dr.db.NewSelect().Model(&driverDTO).

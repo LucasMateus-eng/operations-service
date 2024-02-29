@@ -42,10 +42,10 @@ type DriverSpecification struct {
 }
 
 type Reading interface {
-	GetById(ctx context.Context, id int64) (*Driver, error)
-	GetByUserId(ctx context.Context, userId int64) (*Driver, error)
-	GetByIdWithEagerLoading(ctx context.Context, id int64) (*Driver, error)
-	GetByUserIdWithEagerLoading(ctx context.Context, userId int64) (*Driver, error)
+	GetByID(ctx context.Context, id int64) (*Driver, error)
+	GetByUserID(ctx context.Context, userId int64) (*Driver, error)
+	GetByIDWithEagerLoading(ctx context.Context, id int64) (*Driver, error)
+	GetByUserIDWithEagerLoading(ctx context.Context, userId int64) (*Driver, error)
 	List(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 	ListWithEagerLoading(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 }
@@ -62,10 +62,10 @@ type Repository interface {
 }
 
 type UseCase interface {
-	GetByDriverId(ctx context.Context, id int64) (*Driver, error)
-	GetByUserId(ctx context.Context, userId int64) (*Driver, error)
-	GetByIdWithEagerLoading(ctx context.Context, id int64) (*Driver, error)
-	GetByUserIdWithEagerLoading(ctx context.Context, userId int64) (*Driver, error)
+	GetByID(ctx context.Context, id int64) (*Driver, error)
+	GetByUserID(ctx context.Context, userId int64) (*Driver, error)
+	GetByIDWithEagerLoading(ctx context.Context, id int64) (*Driver, error)
+	GetByUserIDWithEagerLoading(ctx context.Context, userId int64) (*Driver, error)
 	List(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 	ListWithEagerLoading(ctx context.Context, specification *DriverSpecification) (*[]Driver, error)
 	Create(ctx context.Context, d *Driver) (int64, error)
