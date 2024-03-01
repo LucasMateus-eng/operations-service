@@ -26,5 +26,5 @@ COPY .env .
 # Expose the application on a specific port
 EXPOSE 8080
 
-# # Command to run the application
+# Command to run the application
 CMD ["./operations-service"]
